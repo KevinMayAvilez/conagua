@@ -16,6 +16,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,21 +28,50 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jtUsuario = new javax.swing.JTextField();
+        jbcancelar = new javax.swing.JButton();
+        jbIniciaSesion = new javax.swing.JButton();
+        jpContraseña = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1034, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setText("Usuario:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 100, 30));
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setText("Contraseña:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 100, 30));
+        getContentPane().add(jtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 200, 30));
+
+        jbcancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jbcancelar.setText("Cancelar");
+        jbcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbcancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 100, 30));
+
+        jbIniciaSesion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jbIniciaSesion.setText("Inicia sesion");
+        getContentPane().add(jbIniciaSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 110, 30));
+        getContentPane().add(jpContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 200, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/CONAGUA-LOGO.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, -1, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbcancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +109,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jbIniciaSesion;
+    private javax.swing.JButton jbcancelar;
+    private javax.swing.JPasswordField jpContraseña;
+    private javax.swing.JTextField jtUsuario;
     // End of variables declaration//GEN-END:variables
 }
