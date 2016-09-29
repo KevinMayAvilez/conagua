@@ -5,6 +5,8 @@
  */
 package conagua;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author KEVIN
@@ -60,6 +62,11 @@ public class Login extends javax.swing.JFrame {
 
         jbIniciaSesion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jbIniciaSesion.setText("Inicia sesion");
+        jbIniciaSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIniciaSesionActionPerformed(evt);
+            }
+        });
         getContentPane().add(jbIniciaSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 110, 30));
         getContentPane().add(jpContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 200, 30));
 
@@ -71,7 +78,21 @@ public class Login extends javax.swing.JFrame {
 
     private void jbcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcancelarActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jbcancelarActionPerformed
+
+    private void jbIniciaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIniciaSesionActionPerformed
+        // TODO add your handling code here:
+                String usuario = "conagua";
+        String contraseña = "conagua";
+
+        if (jtUsuario.getText().equals(usuario) && jpContraseña.getText().equals(contraseña)) {
+            Principal p = new Principal();
+            p.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "El usuario o contraseña son incorrectas!");
+        }
+    }//GEN-LAST:event_jbIniciaSesionActionPerformed
 
     /**
      * @param args the command line arguments
