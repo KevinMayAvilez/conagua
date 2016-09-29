@@ -9,7 +9,7 @@ import conagua.usuarios.NuevoUsuario;
 
 /**
  *
- * @author KEVIN
+ * 
  * 
  */
 public class Principal extends javax.swing.JFrame {
