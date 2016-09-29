@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author KEVIN
+ * 
  */
 public class Login extends javax.swing.JFrame {
 
@@ -18,6 +19,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        this.setSize(811, 410);
         this.setLocationRelativeTo(null);
     }
 
@@ -33,66 +35,75 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtUsuario = new javax.swing.JTextField();
-        jbcancelar = new javax.swing.JButton();
-        jbIniciaSesion = new javax.swing.JButton();
+        jb_login = new javax.swing.JButton();
         jpContraseña = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setText("Usuario:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 100, 30));
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(85, 156, 190));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel2.setText("Usuario");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(428, 170, 100, 30);
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Contraseña:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 100, 30));
-        getContentPane().add(jtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 200, 30));
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(85, 156, 190));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel3.setText("Contraseña");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(428, 213, 100, 30);
+        getContentPane().add(jtUsuario);
+        jtUsuario.setBounds(532, 172, 216, 30);
 
-        jbcancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jbcancelar.setText("Cancelar");
-        jbcancelar.addActionListener(new java.awt.event.ActionListener() {
+        jb_login.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
+        jb_login.setForeground(new java.awt.Color(0, 83, 128));
+        jb_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/login2.png"))); // NOI18N
+        jb_login.setText("Login");
+        jb_login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jb_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbcancelarActionPerformed(evt);
+                jb_loginActionPerformed(evt);
             }
         });
-        getContentPane().add(jbcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 100, 30));
+        getContentPane().add(jb_login);
+        jb_login.setBounds(638, 271, 110, 41);
+        getContentPane().add(jpContraseña);
+        jpContraseña.setBounds(532, 215, 216, 30);
 
-        jbIniciaSesion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jbIniciaSesion.setText("Inicia sesion");
-        jbIniciaSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbIniciaSesionActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jbIniciaSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 110, 30));
-        getContentPane().add(jpContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 200, 30));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/conagua_logo_cuadrado.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(20, 10, 390, 375);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/CONAGUA-LOGO.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, -1, 460));
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 83, 128));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("¡Bienvenido!");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(428, 99, 336, 32);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(410, 40, 360, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbcancelarActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jbcancelarActionPerformed
-
-    private void jbIniciaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIniciaSesionActionPerformed
-        // TODO add your handling code here:
-                String usuario = "conagua";
-        String contraseña = "conagua";
-
-        if (jtUsuario.getText().equals(usuario) && jpContraseña.getText().equals(contraseña)) {
+    private void jb_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_loginActionPerformed
+        if (jtUsuario.getText().equals("conagua") && jpContraseña.getText().equals("conagua")) {
             Principal p = new Principal();
             p.setVisible(true);
+            this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "El usuario o contraseña son incorrectas!");
+            JOptionPane.showMessageDialog(null, "El usuario o contraseña son incorrectas.","¡Error!",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jbIniciaSesionActionPerformed
+    }//GEN-LAST:event_jb_loginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,8 +144,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton jbIniciaSesion;
-    private javax.swing.JButton jbcancelar;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jb_login;
     private javax.swing.JPasswordField jpContraseña;
     private javax.swing.JTextField jtUsuario;
     // End of variables declaration//GEN-END:variables

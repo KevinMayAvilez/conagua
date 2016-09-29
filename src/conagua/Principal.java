@@ -5,17 +5,20 @@
  */
 package conagua;
 
+import conagua.usuarios.NuevoUsuario;
+
 /**
  *
  * @author KEVIN
+ * 
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+   Login login;
     public Principal() {
         initComponents();
+        login = new Login();
+        this.setSize(800, 438);
         this.setLocationRelativeTo(null);
     }
 
@@ -28,46 +31,46 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
-        jMenu1.setText("Requerimiento ");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/CONAGUA-LOGO.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 800, 380);
+
+        jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/user2.png"))); // NOI18N
+        jMenu1.setText("Usuarios");
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/list1.png"))); // NOI18N
+        jMenuItem2.setText("Lista de Usuarios");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/adduser.png"))); // NOI18N
+        jMenuItem1.setText("Nuevo Usuario");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Notificación");
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/computer1.png"))); // NOI18N
+        jMenu5.setText("Sistema");
 
-        jMenuItem11.setText("Fecha de notificación");
-        jMenu2.add(jMenuItem11);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Configuracion ");
-
-        jMenuItem13.setText("Plantillas");
-        jMenu3.add(jMenuItem13);
-
-        jMenuItem14.setText("Fechas inhabiles");
-        jMenu3.add(jMenuItem14);
-
-        jMenuItem15.setText("Usuario");
-        jMenu3.add(jMenuItem15);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu5.setText("Salir");
-
-        jMenuItem16.setText("Cerrar sesión");
+        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/logout1.png"))); // NOI18N
+        jMenuItem16.setText("Cerrar Sesión");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem16ActionPerformed(evt);
@@ -83,9 +86,14 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
+        login.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        NuevoUsuario n_usuario = new NuevoUsuario();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,15 +131,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
