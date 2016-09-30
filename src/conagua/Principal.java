@@ -93,6 +93,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         NuevoUsuario n_usuario = new NuevoUsuario();
+        n_usuario.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

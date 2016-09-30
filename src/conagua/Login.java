@@ -19,7 +19,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        this.setSize(811, 410);
+        this.setSize(900, 410);
         this.setLocationRelativeTo(null);
     }
 
@@ -77,7 +77,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jpContraseña);
         jpContraseña.setBounds(532, 215, 216, 30);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/conagua_logo_cuadrado.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/390x133.png"))); // NOI18N
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 10, 390, 375);
 

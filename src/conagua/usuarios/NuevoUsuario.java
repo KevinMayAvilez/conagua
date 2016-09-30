@@ -5,6 +5,8 @@
  */
 package conagua.usuarios;
 
+import conagua.Principal;
+
 /**
  *
  * @author Néstor
@@ -14,8 +16,11 @@ public class NuevoUsuario extends javax.swing.JFrame {
     /**
      * Creates new form NuevoUsuario
      */
+    Principal principal;
     public NuevoUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        principal = new Principal();
     }
 
     /**
@@ -43,7 +48,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jTextField4 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -94,7 +99,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 83, 128));
         jLabel10.setText("Datos de Acceso");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Normal" }));
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 83, 128));
@@ -102,6 +107,11 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel1.setText("Nuevo Usuario");
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Agregar");
 
@@ -205,6 +215,12 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        principal.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
