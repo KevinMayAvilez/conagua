@@ -6,13 +6,14 @@
 package conagua.usuarios;
 
 import conagua.Principal;
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import conagua.conexion.Conexion;
+import conagua.utilidades.Utilidades;
+import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,13 +25,16 @@ public class NuevoUsuario extends javax.swing.JFrame {
      * Creates new form NuevoUsuario
      */
     Principal principal;
-    Connection con =null;
-    Statement stmt = null;
+    Conexion con;
+    Utilidades utilidades;
 
     public NuevoUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
         principal = new Principal();
+        con = new Conexion();
+        utilidades = new Utilidades();
+
     }
 
     /**
@@ -52,16 +56,18 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jtNombre = new javax.swing.JTextField();
-        jtApellidoP = new javax.swing.JTextField();
-        jtApellidoM = new javax.swing.JTextField();
+        jb_nombre = new javax.swing.JTextField();
+        jb_paterno = new javax.swing.JTextField();
+        jb_materno = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jtContraseña = new javax.swing.JPasswordField();
-        jtUsusuario = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jb_contraseña = new javax.swing.JPasswordField();
+        jb_usuario = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jb_contraseña2 = new javax.swing.JPasswordField();
 
         jLabel9.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 83, 128));
@@ -109,7 +115,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 83, 128));
         jLabel10.setText("Datos de Acceso");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Normal" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 83, 128));
@@ -130,6 +136,10 @@ public class NuevoUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(85, 156, 190));
+        jLabel11.setText("Confirmar Contraseña");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,8 +151,10 @@ public class NuevoUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -151,15 +163,15 @@ public class NuevoUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtNombre)
-                                    .addComponent(jtApellidoP)
-                                    .addComponent(jtApellidoM)
-                                    .addComponent(jtContraseña)
-                                    .addComponent(jtUsusuario)
-                                    .addComponent(jComboBox1, 0, 200, Short.MAX_VALUE)))
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 12, Short.MAX_VALUE))
+                                    .addComponent(jb_nombre)
+                                    .addComponent(jb_paterno)
+                                    .addComponent(jb_materno)
+                                    .addComponent(jb_contraseña)
+                                    .addComponent(jb_usuario)
+                                    .addComponent(jComboBox1, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(jb_contraseña2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
@@ -175,15 +187,15 @@ public class NuevoUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jb_paterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_materno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,16 +207,20 @@ public class NuevoUsuario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jtUsusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jb_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jb_contraseña2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -225,76 +241,67 @@ public class NuevoUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         principal.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        String nombre, ApellidoP, ApellidoM, usuario, contraseña, tipo_usuario;
-        nombre = jtNombre.getText();
-        ApellidoP = jtApellidoP.getText();
-        ApellidoM = jtApellidoM.getText();
-        usuario = jtUsusuario.getText();
-        contraseña = jtContraseña.getText();
-        tipo_usuario = jComboBox1.getSelectedItem().toString();
-if (jtNombre.getText().equals("")||jtApellidoP.getText().equals("")||jtApellidoM.getText().equals("")
-        ||jtUsusuario.getText().equals("")||jtContraseña.getText().equals("")||jComboBox1.getSelectedItem().equals("")){
-    javax.swing.JOptionPane.showMessageDialog(this, "Debe llenar todos los campos \n","AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-}
-        else {
-        try {
-           
-            String url = "jdbc:mysql://localhost:3306/Conagua";
-            String usuarioBD = "root";
-            String contraseñaBD = "1122";
-            
-             Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-             con = DriverManager.getConnection(url,usuarioBD,contraseñaBD); 
-             if ( con != null ) 
-                    System.out.println("Se ha establecido una conexión a la base de datos " +  
-                                       "\n " + url ); 
-  
-                  stmt = con.createStatement(); 
-                  stmt.executeUpdate("INSERT INTO usuarios VALUES('"+nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+usuario+"','"+contraseña+"','"+tipo_usuario+"')");
-                  System.out.println("Los valores han sido agregados a la base de datos ");
-                 
-                   
-        } catch (InstantiationException ex) {
-           Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (IllegalAccessException ex) {
-           Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (SQLException ex) {
-           Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
-       }
-        
-        finally {
-            if (con != null) {
-                try {
-                    con.close();
-                    stmt.close();
-                } catch ( Exception e ) { 
-                         System.out.println( e.getMessage());
+
+        if (!jb_nombre.getText().trim().isEmpty() && !jb_paterno.getText().trim().isEmpty()) {
+
+            String contraseña = String.valueOf(jb_contraseña.getPassword());
+            String contraseña_confirmacion = String.valueOf(jb_contraseña2.getPassword());
+            if (!jb_usuario.getText().trim().isEmpty() && !contraseña.trim().isEmpty()
+                    && !contraseña_confirmacion.trim().isEmpty()) {
+                if (contraseña.equals(contraseña_confirmacion)) {
+                    try {
+                        String hash_password = utilidades.StringToMD5(contraseña);
+
+                        String sql = "insert into usuarios"
+                                + "(nombres,apellido_paterno,apellido_materno,usuario,contraseña)"
+                                + " values (?,?,?,?,?)";
+
+                        con.Conectar();
+
+                        PreparedStatement ps = con.InsertPS(sql);
+                        ps.setString(1, jb_nombre.getText());
+                        ps.setString(2, jb_paterno.getText());
+                        ps.setString(3, jb_materno.getText());
+                        ps.setString(4, jb_usuario.getText());
+                        ps.setString(5, hash_password);
+
+                        ps.executeUpdate();
+
+                        con.Cerrar();
+
+                        principal.setVisible(true);
+                        this.dispose();
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (NoSuchAlgorithmException ex) {
+                        Logger.getLogger(NuevoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan datos de acceso.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
             }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Faltan datos personales.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+
         }
-         javax.swing.JOptionPane.showMessageDialog(this,"Registro exitoso! \n","AVISO!",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        }
-        this.jtNombre.setText("");
-        this.jtApellidoP.setText("");
-        this.jtApellidoP.setText("");
-        this.jtUsusuario.setText("");
-        this.jtContraseña.setText("");  
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -339,6 +346,7 @@ if (jtNombre.getText().equals("")||jtApellidoP.getText().equals("")||jtApellidoM
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -349,10 +357,11 @@ if (jtNombre.getText().equals("")||jtApellidoP.getText().equals("")||jtApellidoM
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jtApellidoM;
-    private javax.swing.JTextField jtApellidoP;
-    private javax.swing.JPasswordField jtContraseña;
-    private javax.swing.JTextField jtNombre;
-    private javax.swing.JTextField jtUsusuario;
+    private javax.swing.JPasswordField jb_contraseña;
+    private javax.swing.JPasswordField jb_contraseña2;
+    private javax.swing.JTextField jb_materno;
+    private javax.swing.JTextField jb_nombre;
+    private javax.swing.JTextField jb_paterno;
+    private javax.swing.JTextField jb_usuario;
     // End of variables declaration//GEN-END:variables
 }
