@@ -15,10 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
 
-    private String db = "conagua";
+    private String db = "Conagua";
     private String server = "localhost";
     private String user = "root";
-    private String pass = "mysql";
+    private String pass = "1122";
     Statement st;
     ResultSet rs;
     PreparedStatement ps;
