@@ -31,7 +31,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         con = new Conexion();
         utilidades = new Utilidades();
-        this.setSize(900, 410);
+        this.setSize(800, 410);
         this.setLocationRelativeTo(null);
     }
 
