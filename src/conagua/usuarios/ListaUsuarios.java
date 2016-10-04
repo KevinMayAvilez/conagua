@@ -5,6 +5,14 @@
  */
 package conagua.usuarios;
 
+import conagua.conexion.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Néstor
@@ -14,8 +22,44 @@ public class ListaUsuarios extends javax.swing.JFrame {
     /**
      * Creates new form ListaUsuarios
      */
+    Conexion con;
+    DefaultTableModel modelo;
+    String columnas[] = {"Nombre", "Apellido Paterno", "Apellido Materno", "Usuario"};
+    String empty[] = {"Sin resultados"};
+    Object obj;
+
     public ListaUsuarios() {
         initComponents();
+        con = new Conexion();
+        this.llenarTable();
+    }
+
+    public void llenarTable() {
+
+        modelo = new DefaultTableModel(null, columnas);
+        String sql = "select * from usuarios";
+        con.Conectar();
+        ResultSet rs = con.Consulta(sql);
+
+        try {
+            if (rs.next()) {
+                rs.beforeFirst();
+                while (rs.next()) {
+                    Vector vec = new Vector();
+                    vec.add(rs.getString("nombres"));
+                    vec.add(rs.getString("apellido_paterno"));
+                    vec.add(rs.getString("apellido_materno"));
+                    vec.add(rs.getString("usuario"));
+                    modelo.addRow(vec);
+                }
+                t_usuarios.setModel(modelo);
+            } else {
+                modelo.addRow(empty);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -27,17 +71,45 @@ public class ListaUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        t_usuarios = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Usuarios");
+
+        t_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(t_usuarios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 187, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +151,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable t_usuarios;
     // End of variables declaration//GEN-END:variables
 }
