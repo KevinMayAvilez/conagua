@@ -37,15 +37,15 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -55,6 +55,42 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setBounds(0, 0, 800, 380);
 
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jMenu2.setForeground(new java.awt.Color(51, 51, 51));
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramites1.png"))); // NOI18N
+        jMenu2.setText("Tramites");
+        jMenu2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+
+        jMenuItem3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramite2.png"))); // NOI18N
+        jMenuItem3.setText("Nuevo Tramite");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setForeground(new java.awt.Color(51, 51, 51));
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias1.png"))); // NOI18N
+        jMenu3.setText("Dias Inhabiles");
+        jMenu3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+
+        jMenuItem4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem4.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias2.png"))); // NOI18N
+        jMenuItem4.setText("Agregar Dias");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu1.setForeground(new java.awt.Color(51, 51, 51));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/user2.png"))); // NOI18N
@@ -102,42 +138,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem16);
 
         jMenuBar1.add(jMenu5);
-
-        jMenu2.setForeground(new java.awt.Color(51, 51, 51));
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramites1.png"))); // NOI18N
-        jMenu2.setText("Tramites");
-        jMenu2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-
-        jMenuItem3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jMenuItem3.setForeground(new java.awt.Color(102, 102, 102));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramite2.png"))); // NOI18N
-        jMenuItem3.setText("Nuevo Tramite");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setForeground(new java.awt.Color(51, 51, 51));
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias1.png"))); // NOI18N
-        jMenu3.setText("Dias Inhabiles");
-        jMenu3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-
-        jMenuItem4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jMenuItem4.setForeground(new java.awt.Color(102, 102, 102));
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias2.png"))); // NOI18N
-        jMenuItem4.setText("Agregar Dias");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
