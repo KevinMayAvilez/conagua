@@ -280,7 +280,9 @@ public class NuevoUsuario extends javax.swing.JFrame {
                         ps.executeUpdate();
 
                         con.Cerrar();
-
+                        
+                        JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                        
                         principal.setVisible(true);
                         this.dispose();
 

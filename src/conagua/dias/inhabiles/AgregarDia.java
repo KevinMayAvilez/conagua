@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conagua.tramites;
+package conagua.dias.inhabiles;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
-
+import conagua.tramites.NuevoTramite;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,19 +19,23 @@ import javax.swing.JOptionPane;
  *
  * @author KEVIN
  */
-public class NuevoTramite extends javax.swing.JFrame {
+public class AgregarDia extends javax.swing.JFrame {
 
     /**
-     * Creates new form NuevoTramite
+     * Creates new form AgregarDia
      */
-    Conexion con;
     Principal principal;
+    Conexion con;
+    java.util.Date date;
+    Date sqlDate;
 
-    public NuevoTramite() {
+    public AgregarDia() {
         initComponents();
         this.setLocationRelativeTo(null);
-        con = new Conexion();
         principal = new Principal();
+        con = new Conexion();
+        date = new java.util.Date();
+
     }
 
     /**
@@ -46,8 +51,8 @@ public class NuevoTramite extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jb_codigo = new javax.swing.JTextField();
-        jb_nombre = new javax.swing.JTextField();
+        jb_nombreD = new javax.swing.JTextField();
+        jb_date = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -56,34 +61,24 @@ public class NuevoTramite extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Nuevo Tramite");
+        jLabel1.setText("Agregar Dias Inhabiles");
 
         jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Codigo");
+        jLabel2.setText("Nombre");
 
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Fecha");
 
-        jb_codigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_codigoActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Agregar");
+        jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText("Agregar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -97,42 +92,40 @@ public class NuevoTramite extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jb_codigo)
-                            .addComponent(jb_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jb_nombreD, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jb_date, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(58, 58, 58)
+                                .addComponent(jButton2)))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(54, 54, 54)
-                .addComponent(jButton1)
-                .addGap(65, 65, 65))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jb_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jb_nombreD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jb_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                    .addComponent(jb_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,45 +148,45 @@ public class NuevoTramite extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_codigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_codigoActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!jb_codigo.getText().trim().isEmpty() && !jb_nombre.getText().trim().isEmpty()) {
-            try {
+        this.dispose();
+        principal.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-                String sql = "insert into tramites"
-                        + "(nombre,codigo)"
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        if (!jb_nombreD.getText().trim().isEmpty() && !jb_date.getDate().equals("")) {
+            try {
+                date = jb_date.getDate();
+                sqlDate = new Date(date.getTime());
+
+                String sql = "insert into dias_inhabiles"
+                        + "(nombre,fecha)"
                         + " values (?,?)";
                 con.Conectar();
- 
+
                 PreparedStatement ps = con.InsertPS(sql);
-                ps.setString(1, jb_codigo.getText());
-                ps.setString(2, jb_nombre.getText());
+                ps.setString(1, jb_nombreD.getText());
+                ps.setDate(2, sqlDate);
 
                 ps.executeUpdate();
 
                 con.Cerrar();
-                
+
                 JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 principal.setVisible(true);
                 this.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        principal.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -213,20 +206,20 @@ public class NuevoTramite extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoTramite().setVisible(true);
+                new AgregarDia().setVisible(true);
             }
         });
     }
@@ -238,7 +231,7 @@ public class NuevoTramite extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jb_codigo;
-    private javax.swing.JTextField jb_nombre;
+    private com.toedter.calendar.JDateChooser jb_date;
+    private javax.swing.JTextField jb_nombreD;
     // End of variables declaration//GEN-END:variables
 }
