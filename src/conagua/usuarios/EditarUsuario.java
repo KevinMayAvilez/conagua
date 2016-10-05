@@ -118,11 +118,11 @@ public class EditarUsuario extends javax.swing.JFrame {
 
         jb_materno.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
 
-        jb_contraseña.setEditable(false);
         jb_contraseña.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jb_contraseña.setEnabled(false);
 
-        jb_usuario.setEditable(false);
         jb_usuario.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jb_usuario.setEnabled(false);
 
         jComboBox1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Normal" }));
@@ -152,8 +152,14 @@ public class EditarUsuario extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Confirmar Contraseña");
 
-        jb_contraseña2.setEditable(false);
         jb_contraseña2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jb_contraseña2.setEnabled(false);
+
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
@@ -316,6 +322,22 @@ public class EditarUsuario extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        if(jCheckBox1.isSelected())
+        {
+            jb_usuario.setEnabled(true);
+            jb_contraseña.setEnabled(true);
+            jb_contraseña2.setEnabled(true);
+            jComboBox1.setEnabled(true);
+        }else
+        {
+            jb_usuario.setEnabled(false);
+            jb_contraseña.setEnabled(false);
+            jb_contraseña2.setEnabled(false);
+            jComboBox1.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
