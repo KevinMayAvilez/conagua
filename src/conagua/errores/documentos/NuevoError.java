@@ -100,6 +100,12 @@ public class NuevoError extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Núm. de documento");
 
+        jb_numerodoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_numerodocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -189,15 +195,17 @@ public class NuevoError extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!jb_nombreE.getText().trim().isEmpty() && !jb_descripcionE.getText().trim().isEmpty() && !jb_numerodoc.getText().trim().isEmpty() ){
             try {
-
+                int numeroD;
+                numeroD = Integer.parseInt(jb_numerodoc.getText());
                 String sql = "insert into errores_documentos"
-                + "(error,descripcion)"
-                + " values (?,?)";
+                + "(id_documento,error,descripcion)"
+                + " values (?,?,?)";
                 con.Conectar();
 
                 PreparedStatement ps = con.InsertPS(sql);
                 ps.setString(1, jb_nombreE.getText());
                 ps.setString(2, jb_descripcionE.getText());
+                ps.setInt(3, numeroD);
 
                 ps.executeUpdate();
 
@@ -213,6 +221,10 @@ public class NuevoError extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jb_numerodocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_numerodocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_numerodocActionPerformed
     
     
     /**

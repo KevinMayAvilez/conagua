@@ -6,6 +6,7 @@
 package conagua;
 
 import conagua.dias.inhabiles.AgregarDia;
+import conagua.errores.documentos.NuevoError;
 import conagua.tramites.NuevoTramite;
 import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
@@ -56,7 +57,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 380);
 
-        jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jMenu2.setForeground(new java.awt.Color(51, 51, 51));
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramites1.png"))); // NOI18N
@@ -85,6 +86,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem5.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/error1.png"))); // NOI18N
         jMenuItem5.setText("Nuevo Error");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
@@ -186,6 +192,14 @@ public class Principal extends javax.swing.JFrame {
         ListaUsuarios l_usuario = new ListaUsuarios();
         l_usuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+
+       NuevoError n_error = new NuevoError();
+       n_error.setVisible(true);
+       
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
