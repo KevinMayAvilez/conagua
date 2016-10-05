@@ -7,6 +7,7 @@ package conagua;
 
 import conagua.dias.inhabiles.AgregarDia;
 import conagua.tramites.NuevoTramite;
+import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
 
 /**
@@ -60,6 +61,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/list1.png"))); // NOI18N
         jMenuItem2.setText("Lista de Usuarios");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/adduser.png"))); // NOI18N
@@ -90,6 +96,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramites1.png"))); // NOI18N
         jMenu2.setText("Tramites");
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramite2.png"))); // NOI18N
         jMenuItem3.setText("Nuevo Tramite");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +110,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias1.png"))); // NOI18N
         jMenu3.setText("Dias Inhabiles");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias2.png"))); // NOI18N
         jMenuItem4.setText("Agregar Dias");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +151,13 @@ public class Principal extends javax.swing.JFrame {
         n_dias.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        ListaUsuarios n_listaU = new ListaUsuarios();
+        n_listaU.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
