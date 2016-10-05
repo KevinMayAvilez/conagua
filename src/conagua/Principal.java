@@ -147,8 +147,6 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         NuevoUsuario n_usuario = new NuevoUsuario();
         n_usuario.setVisible(true);
-        this.dispose();
-
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
@@ -160,21 +158,18 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         NuevoTramite n_tramite = new NuevoTramite();
         n_tramite.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        AgregarDia n_dias = new AgregarDia();
-        n_dias.setVisible(true);
-        this.dispose();
+        AgregarDia a_dia = new AgregarDia();
+        a_dia.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        ListaUsuarios n_listaU = new ListaUsuarios();
-        n_listaU.setVisible(true);
-        this.dispose();
+        ListaUsuarios l_usuario = new ListaUsuarios();
+        l_usuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**

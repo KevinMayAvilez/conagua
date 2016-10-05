@@ -8,9 +8,11 @@ package conagua.usuarios;
 import conagua.conexion.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +28,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
     DefaultTableModel modelo;
     String columnas[] = {"Nombre", "Apellido Paterno", "Apellido Materno", "Usuario"};
     String empty[] = {"Sin resultados"};
+    ArrayList<Integer> ids_usuarios;
     Object obj;
 
     public ListaUsuarios() {
@@ -37,6 +40,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
 
     public void llenarTable() {
 
+        ids_usuarios = new ArrayList<Integer>();
         modelo = new DefaultTableModel(null, columnas);
         String sql = "select * from usuarios";
         con.Conectar();
@@ -47,6 +51,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
                 rs.beforeFirst();
                 while (rs.next()) {
                     Vector vec = new Vector();
+                    ids_usuarios.add(rs.getInt("id"));
                     vec.add(rs.getString("nombres"));
                     vec.add(rs.getString("apellido_paterno"));
                     vec.add(rs.getString("apellido_materno"));
@@ -65,12 +70,13 @@ public class ListaUsuarios extends javax.swing.JFrame {
 
     public void findUser() {
 
+        ids_usuarios = new ArrayList<Integer>();
         modelo = new DefaultTableModel(null, columnas);
         String sql = "select * from usuarios where "
                 + "nombres like '%" + jb_search.getText() + "%' or "
                 + "apellido_paterno like '%" + jb_search.getText() + "%' or "
                 + "usuario like '%" + jb_search.getText() + "%'";
-       
+
         con.Conectar();
         ResultSet rs = con.Consulta(sql);
 
@@ -121,6 +127,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
+        t_usuarios.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
         t_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -132,6 +139,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
         t_usuarios.setSelectionBackground(new java.awt.Color(102, 102, 102));
         jScrollPane2.setViewportView(t_usuarios);
 
+        jb_search.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
         jb_search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jb_searchKeyReleased(evt);
@@ -151,15 +159,25 @@ public class ListaUsuarios extends javax.swing.JFrame {
         jButton1.setText("Agregar");
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(102, 102, 102));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
         jButton2.setText("Editar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(102, 102, 102));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/trash.png"))); // NOI18N
         jButton3.setText("Borrar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -222,6 +240,24 @@ public class ListaUsuarios extends javax.swing.JFrame {
             llenarTable();
         }
     }//GEN-LAST:event_jb_searchKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        NuevoUsuario nu = new NuevoUsuario(this);
+        nu.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        if(t_usuarios.getSelectedRow() > 0)
+        {
+            EditarUsuario eu = new EditarUsuario(this,ids_usuarios.get(t_usuarios.getSelectedRow()));    
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
