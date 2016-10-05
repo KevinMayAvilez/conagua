@@ -56,9 +56,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jMenu1.setForeground(new java.awt.Color(51, 51, 51));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/user2.png"))); // NOI18N
         jMenu1.setText("Usuarios");
+        jMenu1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
+        jMenuItem2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem2.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/list1.png"))); // NOI18N
         jMenuItem2.setText("Lista de Usuarios");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +72,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem1.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/adduser.png"))); // NOI18N
         jMenuItem1.setText("Nuevo Usuario");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -79,9 +85,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu5.setForeground(new java.awt.Color(51, 51, 51));
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/computer1.png"))); // NOI18N
         jMenu5.setText("Sistema");
+        jMenu5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
+        jMenuItem16.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem16.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/logout1.png"))); // NOI18N
         jMenuItem16.setText("Cerrar Sesión");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -93,9 +103,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu2.setForeground(new java.awt.Color(51, 51, 51));
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramites1.png"))); // NOI18N
         jMenu2.setText("Tramites");
+        jMenu2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
+        jMenuItem3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramite2.png"))); // NOI18N
         jMenuItem3.setText("Nuevo Tramite");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -107,9 +121,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setForeground(new java.awt.Color(51, 51, 51));
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias1.png"))); // NOI18N
         jMenu3.setText("Dias Inhabiles");
+        jMenu3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
+        jMenuItem4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem4.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias2.png"))); // NOI18N
         jMenuItem4.setText("Agregar Dias");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
