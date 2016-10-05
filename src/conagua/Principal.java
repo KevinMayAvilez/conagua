@@ -39,6 +39,8 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -73,6 +75,19 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu4.setForeground(new java.awt.Color(51, 51, 51));
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/doc1.png"))); // NOI18N
+        jMenu4.setText("Documentos");
+        jMenu4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+
+        jMenuItem5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem5.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/error1.png"))); // NOI18N
+        jMenuItem5.setText("Nuevo Error");
+        jMenu4.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu4);
 
         jMenu3.setForeground(new java.awt.Color(51, 51, 51));
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias1.png"))); // NOI18N
@@ -212,6 +227,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -219,5 +235,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }
