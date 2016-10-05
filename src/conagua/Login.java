@@ -52,6 +52,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -59,14 +60,14 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(85, 156, 190));
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Usuario");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(428, 170, 100, 30);
 
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(85, 156, 190));
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Contraseña");
         getContentPane().add(jLabel3);
@@ -75,7 +76,7 @@ public class Login extends javax.swing.JFrame {
         jb_usuario.setBounds(532, 172, 216, 30);
 
         jb_login.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jb_login.setForeground(new java.awt.Color(0, 83, 128));
+        jb_login.setForeground(new java.awt.Color(102, 102, 102));
         jb_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/login2.png"))); // NOI18N
         jb_login.setText("Login");
         jb_login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -89,20 +90,26 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jb_contraseña);
         jb_contraseña.setBounds(532, 215, 216, 30);
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/390x133.png"))); // NOI18N
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 10, 390, 375);
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 83, 128));
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("¡Bienvenido!");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(428, 99, 336, 32);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jPanel1);
         jPanel1.setBounds(410, 40, 360, 310);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 800, 390);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -198,6 +205,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jb_contraseña;
     private javax.swing.JButton jb_login;
     private javax.swing.JTextField jb_usuario;
