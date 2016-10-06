@@ -86,6 +86,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem6.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/doc2.png"))); // NOI18N
         jMenuItem6.setText("Documentos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
