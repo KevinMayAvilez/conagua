@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package conagua.errores.documentos;
+package conagua.documentos;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
@@ -195,17 +195,17 @@ public class NuevoError extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!jb_nombreE.getText().trim().isEmpty() && !jb_descripcionE.getText().trim().isEmpty() && !jb_numerodoc.getText().trim().isEmpty() ){
             try {
-                int numeroD;
-                numeroD = Integer.parseInt(jb_numerodoc.getText());
+                int numeroD = Integer.parseInt(jb_numerodoc.getText());
                 String sql = "insert into errores_documentos"
                 + "(id_documento,error,descripcion)"
                 + " values (?,?,?)";
                 con.Conectar();
 
                 PreparedStatement ps = con.InsertPS(sql);
-                ps.setString(1, jb_nombreE.getText());
-                ps.setString(2, jb_descripcionE.getText());
-                ps.setInt(3, numeroD);
+                ps.setInt(1, numeroD);
+                ps.setString(2, jb_nombreE.getText());
+                ps.setString(3, jb_descripcionE.getText());
+                
 
                 ps.executeUpdate();
 

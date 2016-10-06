@@ -31,7 +31,7 @@ public class Conexion {
             conexion = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "No se pudo conectar a la bade de datos",
+            JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos",
                     "Error en conexión", JOptionPane.ERROR_MESSAGE);
         }
     }

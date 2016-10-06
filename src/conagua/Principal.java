@@ -6,7 +6,8 @@
 package conagua;
 
 import conagua.dias.inhabiles.AgregarDia;
-import conagua.errores.documentos.NuevoError;
+import conagua.documentos.Documentos;
+import conagua.documentos.NuevoError;
 import conagua.tramites.NuevoTramite;
 import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
@@ -41,6 +42,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -57,7 +59,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 380);
 
-        jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu2.setForeground(new java.awt.Color(51, 51, 51));
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramites1.png"))); // NOI18N
@@ -81,6 +83,16 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/doc1.png"))); // NOI18N
         jMenu4.setText("Documentos");
         jMenu4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+
+        jMenuItem6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem6.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem6.setText("Documentos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
 
         jMenuItem5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem5.setForeground(new java.awt.Color(102, 102, 102));
@@ -201,6 +213,12 @@ public class Principal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        Documentos n_doc = new Documentos();
+        n_doc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,5 +268,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }
