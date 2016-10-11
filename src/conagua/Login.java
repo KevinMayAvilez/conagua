@@ -122,7 +122,7 @@ public class Login extends javax.swing.JFrame {
         if (!usuario.trim().isEmpty() && !contraseña.trim().isEmpty()) {
 
             con.Conectar();
-            String sql = "select * from usuarios where usuario = '" + usuario + "'";
+            String sql = "select * from usuarios where usuario = '" + usuario + "' and habilitado = 1";
 
             ResultSet rs = con.Consulta(sql);
 

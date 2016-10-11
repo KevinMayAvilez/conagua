@@ -6,6 +6,7 @@
 package conagua.usuarios;
 
 import conagua.conexion.Conexion;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
 
         ids_usuarios = new ArrayList<Integer>();
         modelo = new DefaultTableModel(null, columnas);
-        String sql = "select * from usuarios";
+        String sql = "select * from usuarios where habilitado = 1";
         con.Conectar();
         ResultSet rs = con.Consulta(sql);
 
@@ -62,6 +63,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
             } else {
                 modelo.addRow(empty);
             }
+
+            con.Cerrar();
         } catch (SQLException ex) {
             Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,7 +78,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
         String sql = "select * from usuarios where "
                 + "nombres like '%" + jb_search.getText() + "%' or "
                 + "apellido_paterno like '%" + jb_search.getText() + "%' or "
-                + "usuario like '%" + jb_search.getText() + "%'";
+                + "usuario like '%" + jb_search.getText() + "%' and "
+                + "habilitado = 1";
 
         con.Conectar();
         ResultSet rs = con.Consulta(sql);
@@ -91,10 +95,11 @@ public class ListaUsuarios extends javax.swing.JFrame {
                     vec.add(rs.getString("usuario"));
                     modelo.addRow(vec);
                 }
-                t_usuarios.setModel(modelo);
             } else {
                 modelo.addRow(empty);
             }
+            t_usuarios.setModel(modelo);
+            con.Cerrar();
         } catch (SQLException ex) {
             Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -253,19 +258,36 @@ public class ListaUsuarios extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if(t_usuarios.getSelectedRow() > 0)
-        {
-            EditarUsuario eu = new EditarUsuario(this,ids_usuarios.get(t_usuarios.getSelectedRow()));    
-        }else
-        {
+        if (t_usuarios.getSelectedRow() > -1) {
+            EditarUsuario eu = new EditarUsuario(this, ids_usuarios.get(t_usuarios.getSelectedRow()));
+            eu.setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione un usuario.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        if (t_usuarios.getSelectedRow() > -1) {
+            try {
+                String sql = "update usuarios set habilitado = ? where id=" + ids_usuarios.get(t_usuarios.getSelectedRow());
+                con.Conectar();
+                PreparedStatement ps = con.InsertPS(sql);
+                ps.setInt(1, 0);
+                ps.executeUpdate();
+                con.Cerrar();
+
+                JOptionPane.showMessageDialog(null, "Se borro correctamente el usuario.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+
+                this.llenarTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

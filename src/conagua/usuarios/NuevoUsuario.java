@@ -72,7 +72,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jb_contraseña = new javax.swing.JPasswordField();
         jb_usuario = new javax.swing.JTextField();
-        jc_tipoUser = new javax.swing.JComboBox<String>();
+        jc_tipo = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -82,7 +82,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 83, 128));
         jLabel9.setText("Datos Personales");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -137,8 +137,8 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
         jb_usuario.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
 
-        jc_tipoUser.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
-        jc_tipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Administrador" }));
+        jc_tipo.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jc_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Administrador" }));
 
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
@@ -191,7 +191,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
                                     .addComponent(jb_materno)
                                     .addComponent(jb_contraseña)
                                     .addComponent(jb_usuario)
-                                    .addComponent(jc_tipoUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jc_tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jb_contraseña2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -237,7 +237,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jc_tipoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jc_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -281,16 +281,18 @@ public class NuevoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+             
         if (!jb_nombre.getText().trim().isEmpty() && !jb_paterno.getText().trim().isEmpty()) {
 
             String contraseña = String.valueOf(jb_contraseña.getPassword());
             String contraseña_confirmacion = String.valueOf(jb_contraseña2.getPassword());
+            
+            
             if (!jb_usuario.getText().trim().isEmpty() && !contraseña.trim().isEmpty()
                     && !contraseña_confirmacion.trim().isEmpty()) {
                 if (contraseña.equals(contraseña_confirmacion)) {
                     try {
-                        if (jc_tipoUser.getSelectedIndex() == 0) {
+                        if (jc_tipo.getSelectedIndex() == 0) {
                             String hash_password = utilidades.StringToMD5(contraseña);
 
                             String sql = "insert into usuarios"
@@ -305,8 +307,8 @@ public class NuevoUsuario extends javax.swing.JFrame {
                             ps.setString(3, jb_materno.getText());
                             ps.setString(4, jb_usuario.getText());
                             ps.setString(5, hash_password);
-                            ps.setInt(6, jc_tipoUser.getSelectedIndex());
-                            ps.setInt(7, 0);
+                            ps.setInt(6, jc_tipo.getSelectedIndex());
+                            ps.setInt(7, 1);
 
                             ps.executeUpdate();
 
@@ -335,7 +337,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
                             ps.setString(3, jb_materno.getText());
                             ps.setString(4, jb_usuario.getText());
                             ps.setString(5, hash_password);
-                            ps.setInt(6, jc_tipoUser.getSelectedIndex());
+                            ps.setInt(6, jc_tipo.getSelectedIndex());
                             ps.setInt(7, 1);
 
                             ps.executeUpdate();
@@ -429,6 +431,6 @@ public class NuevoUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jb_nombre;
     private javax.swing.JTextField jb_paterno;
     private javax.swing.JTextField jb_usuario;
-    private javax.swing.JComboBox<String> jc_tipoUser;
+    private javax.swing.JComboBox<String> jc_tipo;
     // End of variables declaration//GEN-END:variables
 }

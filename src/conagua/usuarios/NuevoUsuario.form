@@ -15,7 +15,7 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -111,7 +111,7 @@
                                           <Component id="jb_materno" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jb_contraseña" max="32767" attributes="0"/>
                                           <Component id="jb_usuario" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jc_tipoUser" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jc_tipo" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jb_contraseña2" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -171,7 +171,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <Component id="jc_tipoUser" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jc_tipo" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="25" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -313,7 +313,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jc_tipoUser">
+            <Component class="javax.swing.JComboBox" name="jc_tipo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Microsoft JhengHei UI" size="14" style="0"/>

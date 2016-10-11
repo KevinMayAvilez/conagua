@@ -10,6 +10,7 @@ import conagua.conexion.Conexion;
 import conagua.utilidades.Utilidades;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,7 @@ public class EditarUsuario extends javax.swing.JFrame {
     Utilidades utilidades;
     ListaUsuarios lu;
     int id;
-    
+
     public EditarUsuario(ListaUsuarios lu, int id) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -38,8 +39,31 @@ public class EditarUsuario extends javax.swing.JFrame {
         principal = new Principal();
         con = new Conexion();
         utilidades = new Utilidades();
+        llenarCampos();
     }
-   
+
+    public void llenarCampos() {
+
+        try {
+            String sql = "select * from usuarios where id =" + id;
+
+            con.Conectar();
+            ResultSet rs = con.Consulta(sql);
+
+            while (rs.next()) {
+                jb_nombre.setText(rs.getString("nombres"));
+                jb_paterno.setText(rs.getString("apellido_paterno"));
+                jb_materno.setText(rs.getString("apellido_materno"));
+                jc_user.setSelectedIndex(rs.getInt("tipo_usuario"));
+                jb_usuario.setText(rs.getString("usuario"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,19 +88,19 @@ public class EditarUsuario extends javax.swing.JFrame {
         jb_materno = new javax.swing.JTextField();
         jb_contraseña = new javax.swing.JPasswordField();
         jb_usuario = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jc_user = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jb_contraseña2 = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        check_editar = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         jLabel9.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 83, 128));
         jLabel9.setText("Datos Personales");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -129,9 +153,9 @@ public class EditarUsuario extends javax.swing.JFrame {
         jb_usuario.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_usuario.setEnabled(false);
 
-        jComboBox1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Normal" }));
-        jComboBox1.setEnabled(false);
+        jc_user.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jc_user.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Administrador" }));
+        jc_user.setEnabled(false);
 
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(102, 102, 102));
@@ -146,7 +170,7 @@ public class EditarUsuario extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
-        jButton1.setText("Editar");
+        jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -160,9 +184,9 @@ public class EditarUsuario extends javax.swing.JFrame {
         jb_contraseña2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_contraseña2.setEnabled(false);
 
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        check_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                check_editarActionPerformed(evt);
             }
         });
 
@@ -197,9 +221,9 @@ public class EditarUsuario extends javax.swing.JFrame {
                                     .addComponent(jb_materno)
                                     .addComponent(jb_contraseña)
                                     .addComponent(jb_usuario)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jc_user, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jb_contraseña2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCheckBox1))))
+                                    .addComponent(check_editar))))
                         .addContainerGap(18, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -228,7 +252,7 @@ public class EditarUsuario extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jCheckBox1))
+                    .addComponent(check_editar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -244,7 +268,7 @@ public class EditarUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jc_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -293,15 +317,32 @@ public class EditarUsuario extends javax.swing.JFrame {
 
             String contraseña = String.valueOf(jb_contraseña.getPassword());
             String contraseña_confirmacion = String.valueOf(jb_contraseña2.getPassword());
+            
+                     
             if (!jb_usuario.getText().trim().isEmpty() && !contraseña.trim().isEmpty()
-                    && !contraseña_confirmacion.trim().isEmpty()) {
+                    && !contraseña_confirmacion.trim().isEmpty() || !check_editar.isSelected()) {
                 if (contraseña.equals(contraseña_confirmacion)) {
                     try {
+                        
                         String hash_password = utilidades.StringToMD5(contraseña);
 
-                        String sql = "insert into usuarios"
-                                + "(nombres,apellido_paterno,apellido_materno,usuario,contraseña)"
-                                + " values (?,?,?,?,?)";
+                        String sql = "";
+                        if (!check_editar.isSelected()) {
+                            sql = "update usuarios set "
+                                    + "nombres = ?,"
+                                    + "apellido_paterno = ?,"
+                                    + "apellido_materno = ? "
+                                    + "where id=" + id;
+                        } else {
+                            sql = "update usuarios set "
+                                    + "nombres = ?,"
+                                    + "apellido_paterno = ?,"
+                                    + "apellido_materno = ?,"
+                                    + "usuario = ?,"
+                                    + "contraseña = ?,"
+                                    + "tipo_usuario= ? "
+                                    + "where id=" + id;
+                        }
 
                         con.Conectar();
 
@@ -309,17 +350,20 @@ public class EditarUsuario extends javax.swing.JFrame {
                         ps.setString(1, jb_nombre.getText());
                         ps.setString(2, jb_paterno.getText());
                         ps.setString(3, jb_materno.getText());
-                        ps.setString(4, jb_usuario.getText());
-                        ps.setString(5, hash_password);
+                        
+                        if (check_editar.isSelected()) {
+                            ps.setString(4, jb_usuario.getText());
+                            ps.setString(5, hash_password);
+                            ps.setInt(6, jc_user.getSelectedIndex());
+                        }
 
                         ps.executeUpdate();
-
                         con.Cerrar();
-                        
+
                         JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
-                        
+
                         lu.llenarTable();
-                        
+
                         this.dispose();
 
                     } catch (SQLException ex) {
@@ -343,21 +387,19 @@ public class EditarUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        if(jCheckBox1.isSelected())
-        {
+    private void check_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check_editarActionPerformed
+        if (check_editar.isSelected()) {
             jb_usuario.setEnabled(true);
             jb_contraseña.setEnabled(true);
             jb_contraseña2.setEnabled(true);
-            jComboBox1.setEnabled(true);
-        }else
-        {
+            jc_user.setEnabled(true);
+        } else {
             jb_usuario.setEnabled(false);
             jb_contraseña.setEnabled(false);
             jb_contraseña2.setEnabled(false);
-            jComboBox1.setEnabled(false);
+            jc_user.setEnabled(false);
         }
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_check_editarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,16 +432,15 @@ public class EditarUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarUsuario(null,0).setVisible(true);
+                new EditarUsuario(null, 0).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox check_editar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -418,5 +459,6 @@ public class EditarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jb_nombre;
     private javax.swing.JTextField jb_paterno;
     private javax.swing.JTextField jb_usuario;
+    private javax.swing.JComboBox<String> jc_user;
     // End of variables declaration//GEN-END:variables
 }
