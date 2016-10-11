@@ -9,7 +9,7 @@ import conagua.conexion.Conexion;
 import conagua.dias.inhabiles.AgregarDia;
 import conagua.documentos.NuevoDocumento;
 import conagua.documentos.NuevoError;
-import conagua.tramites.ListaTramites;
+import conagua.tramites.NuevoTramite;
 import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
 import java.sql.ResultSet;
@@ -199,7 +199,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        ListaTramites n_tramite = new ListaTramites();
+        NuevoTramite n_tramite = new NuevoTramite();
         n_tramite.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
