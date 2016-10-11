@@ -5,6 +5,16 @@
  */
 package conagua.tramites;
 
+import conagua.conexion.Conexion;
+import conagua.usuarios.ListaUsuarios;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Néstor
@@ -14,8 +24,80 @@ public class ListaTramites extends javax.swing.JFrame {
     /**
      * Creates new form ListaTramites
      */
+    Conexion con;
+    DefaultTableModel modelo;
+    String columnas[] = {"Nombre", "Codigo"};
+    String empty[] = {"Sin resultados"};
+    ArrayList<Integer> ids_tramites;
+    Object obj;
+
     public ListaTramites() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        con = new Conexion();
+        this.llenarTable();
+    }
+
+    public void llenarTable() {
+
+        ids_tramites = new ArrayList<Integer>();
+        modelo = new DefaultTableModel(null, columnas);
+        String sql = "select * from tramites";
+        con.Conectar();
+        ResultSet rs = con.Consulta(sql);
+
+        try {
+            if (rs.next()) {
+                rs.beforeFirst();
+                while (rs.next()) {
+                    Vector vec = new Vector();
+                    ids_tramites.add(rs.getInt("id"));
+                    vec.add(rs.getString("nombre"));
+                    vec.add(rs.getString("codigo"));
+                    modelo.addRow(vec);
+                }
+                t_tramites.setModel(modelo);
+            } else {
+                modelo.addRow(empty);
+            }
+
+            con.Cerrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void findTramite() {
+
+        ids_tramites = new ArrayList<Integer>();
+        modelo = new DefaultTableModel(null, columnas);
+        String sql = "select * from tramites where "
+                + "nombre like '%" + jb_search.getText() + "%' or "
+                + "codigo like '%" + jb_search.getText() + "%'";
+
+        con.Conectar();
+        ResultSet rs = con.Consulta(sql);
+
+        try {
+            if (rs.next()) {
+                rs.beforeFirst();
+                while (rs.next()) {
+                    Vector vec = new Vector();
+                    ids_tramites.add(rs.getInt("id"));
+                    vec.add(rs.getString("nombre"));
+                    vec.add(rs.getString("codigo"));
+                    modelo.addRow(vec);
+                }
+            } else {
+                modelo.addRow(empty);
+            }
+            t_tramites.setModel(modelo);
+            con.Cerrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -27,21 +109,72 @@ public class ListaTramites extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        t_tramites = new javax.swing.JTable();
+        jb_search = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+
+        t_tramites.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(t_tramites);
+
+        jb_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jb_searchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jb_searchKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(jb_search, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jb_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jb_searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_searchKeyTyped
+        
+        
+        
+    }//GEN-LAST:event_jb_searchKeyTyped
+
+    private void jb_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_searchKeyReleased
+         if (!jb_search.getText().trim().isEmpty()) {
+            findTramite();
+        } else {
+            llenarTable();
+        }
+    }//GEN-LAST:event_jb_searchKeyReleased
 
     /**
      * @param args the command line arguments
@@ -79,5 +212,8 @@ public class ListaTramites extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jb_search;
+    private javax.swing.JTable t_tramites;
     // End of variables declaration//GEN-END:variables
 }
