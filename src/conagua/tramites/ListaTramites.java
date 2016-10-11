@@ -9,6 +9,7 @@ import conagua.Principal;
 import conagua.conexion.Conexion;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author KEVIN
  */
-public class NuevoTramite extends javax.swing.JFrame {
+public class ListaTramites extends javax.swing.JFrame {
 
     /**
      * Creates new form NuevoTramite
@@ -26,7 +27,7 @@ public class NuevoTramite extends javax.swing.JFrame {
     Conexion con;
     Principal principal;
 
-    public NuevoTramite() {
+    public ListaTramites() {
         initComponents();
         this.setLocationRelativeTo(null);
         con = new Conexion();
@@ -172,28 +173,39 @@ public class NuevoTramite extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!jb_codigo.getText().trim().isEmpty() && !jb_nombre.getText().trim().isEmpty()) {
             try {
-
-                String sql = "insert into tramites"
-                        + "(nombre,codigo)"
-                        + " values (?,?)";
                 con.Conectar();
- 
-                PreparedStatement ps = con.InsertPS(sql);
-                ps.setString(1, jb_codigo.getText());
-                ps.setString(2, jb_nombre.getText());
 
-                ps.executeUpdate();
+                String sql = "select * from tramites where codigo =" + jb_codigo.getText().trim();
 
+                ResultSet rs = con.Consulta(sql);
+
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Ya existe este código", "aviso", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    sql = "insert into tramites"
+                            + "(nombre,codigo)"
+                            + " values (?,?)";
+
+                    PreparedStatement ps = con.InsertPS(sql);
+                    ps.setString(1, jb_nombre.getText());
+                    ps.setString(2, jb_codigo.getText());
+
+                    ps.executeUpdate();
+
+                    con.Cerrar();
+
+                    JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+
+                    principal.setVisible(true);
+                    this.dispose();
+                }
+                
                 con.Cerrar();
-                
-                JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
-                
-                principal.setVisible(true);
-                this.dispose();
+
             } catch (SQLException ex) {
-                Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListaTramites.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
 
@@ -222,20 +234,21 @@ public class NuevoTramite extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaTramites.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaTramites.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaTramites.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaTramites.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoTramite().setVisible(true);
+                new ListaTramites().setVisible(true);
             }
         });
     }

@@ -7,7 +7,7 @@ package conagua.dias.inhabiles;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
-import conagua.tramites.NuevoTramite;
+import conagua.tramites.ListaTramites;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -214,7 +214,7 @@ public class AgregarDia extends javax.swing.JFrame {
                 principal.setVisible(true);
                 this.dispose();
             } catch (SQLException ex) {
-                Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListaTramites.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);

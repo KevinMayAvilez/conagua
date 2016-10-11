@@ -7,29 +7,53 @@ package conagua.documentos;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
-import conagua.tramites.NuevoTramite;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author KEVIN
  */
-public class Documentos extends javax.swing.JFrame {
+public class NuevoDocumento extends javax.swing.JFrame {
 
     /**
      * Creates new form Documentos
      */
     Principal principal;
     Conexion con;
-    public Documentos() {
+    ArrayList<Integer> ids_tramites;
+
+    public NuevoDocumento() {
         initComponents();
         this.setLocationRelativeTo(null);
+        ids_tramites = new ArrayList<Integer>();
         principal = new Principal();
         con = new Conexion();
+        this.llenarTramites();
+    }
+
+    public void llenarTramites() {
+        try {
+            String sql = "select * from tramites";
+
+            con.Conectar();
+            ResultSet rs = con.Consulta(sql);
+
+            while (rs.next()) {
+
+                jc_tramites.addItem(rs.getString("codigo") + "-" + rs.getString("nombre"));
+                ids_tramites.add(rs.getInt("id"));
+            }
+
+            con.Cerrar();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -46,12 +70,12 @@ public class Documentos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jb_tipoTramite = new javax.swing.JTextField();
         jb_nomDoc = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jb_descripcion = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jc_tramites = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,31 +129,32 @@ public class Documentos extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(73, 73, 73)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jb_tipoTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jb_nomDoc)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                            .addComponent(jc_tramites, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton2)
+                        .addGap(73, 73, 73)
+                        .addComponent(jButton1)))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jb_tipoTramite, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jc_tramites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -142,7 +167,7 @@ public class Documentos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -183,7 +208,12 @@ public class Documentos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
+
+        System.out.println(id_tramite);
+
+        /*
         if (!jb_tipoTramite.getText().trim().isEmpty() && !jb_nomDoc.getText().trim().isEmpty() && !jb_descripcion.getText().trim().isEmpty() ){
             try {
                 int numeroT = Integer.parseInt(jb_tipoTramite.getText());
@@ -211,6 +241,7 @@ public class Documentos extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "warning", JOptionPane.WARNING_MESSAGE);
         }
+         */
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -230,20 +261,21 @@ public class Documentos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Documentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Documentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Documentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Documentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Documentos().setVisible(true);
+                new NuevoDocumento().setVisible(true);
             }
         });
     }
@@ -259,6 +291,6 @@ public class Documentos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jb_descripcion;
     private javax.swing.JTextField jb_nomDoc;
-    private javax.swing.JTextField jb_tipoTramite;
+    private javax.swing.JComboBox<String> jc_tramites;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,12 +5,18 @@
  */
 package conagua;
 
+import conagua.conexion.Conexion;
 import conagua.dias.inhabiles.AgregarDia;
-import conagua.documentos.Documentos;
+import conagua.documentos.NuevoDocumento;
 import conagua.documentos.NuevoError;
-import conagua.tramites.NuevoTramite;
+import conagua.tramites.ListaTramites;
 import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,12 +26,14 @@ import conagua.usuarios.NuevoUsuario;
 public class Principal extends javax.swing.JFrame {
 
     Login login;
-
+    Conexion con;
+    
     public Principal() {
         initComponents();
         login = new Login();
         this.setSize(800, 438);
         this.setLocationRelativeTo(null);
+        con = new Conexion();
     }
 
     /**
@@ -53,6 +61,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem16 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/CONAGUA-LOGO.jpg"))); // NOI18N
@@ -190,7 +199,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        NuevoTramite n_tramite = new NuevoTramite();
+        ListaTramites n_tramite = new ListaTramites();
         n_tramite.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -209,14 +218,31 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
 
-       NuevoError n_error = new NuevoError();
-       n_error.setVisible(true);
-       
+        NuevoError n_error = new NuevoError();
+        n_error.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
-        Documentos n_doc = new Documentos();
+
+        try {
+            
+            String sql = "select * from tramites";
+
+            con.Conectar();
+            ResultSet rs = con.Consulta(sql);
+
+            while (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    System.out.println(rs.getInt(1));
+                } else {
+                    JOptionPane.showMessageDialog(null, "No hay documentos", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        NuevoDocumento n_doc = new NuevoDocumento();
         n_doc.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 

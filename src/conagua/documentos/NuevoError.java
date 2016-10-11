@@ -6,7 +6,7 @@ package conagua.documentos;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
-import conagua.tramites.NuevoTramite;
+import conagua.tramites.ListaTramites;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -214,7 +214,7 @@ public class NuevoError extends javax.swing.JFrame {
                 principal.setVisible(true);
                 this.dispose();
             } catch (SQLException ex) {
-                Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListaTramites.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else {
