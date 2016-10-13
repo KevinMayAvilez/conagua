@@ -7,11 +7,13 @@ package conagua.documentos;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,7 +77,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
         jb_descripcion = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jc_tramites = new javax.swing.JComboBox<>();
+        jc_tramites = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,9 +131,9 @@ public class NuevoDocumento extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -142,7 +144,6 @@ public class NuevoDocumento extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                             .addComponent(jc_tramites, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addComponent(jButton2)
                         .addGap(73, 73, 73)
                         .addComponent(jButton1)))
@@ -158,7 +159,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jb_nomDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jb_nomDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -209,9 +210,42 @@ public class NuevoDocumento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
+        if (!jb_nomDoc.getText().isEmpty() && !jb_descripcion.getText().isEmpty()){
+            try {
+                String sql = "insert into documentos"
+                                    + "(id_tramite, nombre, descripcion)"
+                                    + " values (?,?,?)";
+                con.Conectar();
+                
+                int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
+                        
+                PreparedStatement ps = con.InsertPS(sql);
+                ps.setInt(1, id_tramite);
+                ps.setString(2, jb_nomDoc.getText());
+                ps.setString(3, jb_descripcion.getText());
+                
+                ps.executeUpdate();
+                
+                con.Cerrar();
+                JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                principal.setVisible(true);
+                this.dispose();
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan datos.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+        }
 
-        System.out.println(id_tramite);
+
+
+
+//int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
+
+       // System.out.println(id_tramite);
 
         /*
         if (!jb_tipoTramite.getText().trim().isEmpty() && !jb_nomDoc.getText().trim().isEmpty() && !jb_descripcion.getText().trim().isEmpty() ){

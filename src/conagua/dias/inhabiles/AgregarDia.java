@@ -211,7 +211,7 @@ public class AgregarDia extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
 
-                principal.setVisible(true);
+                //principal.setVisible(true);
                 this.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
