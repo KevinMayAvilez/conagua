@@ -10,6 +10,7 @@ import conagua.conexion.Conexion;
 import conagua.utilidades.Utilidades;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -281,25 +282,28 @@ public class NuevoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-             
+
         if (!jb_nombre.getText().trim().isEmpty() && !jb_paterno.getText().trim().isEmpty()) {
 
             String contraseña = String.valueOf(jb_contraseña.getPassword());
             String contraseña_confirmacion = String.valueOf(jb_contraseña2.getPassword());
-            
-            
+
             if (!jb_usuario.getText().trim().isEmpty() && !contraseña.trim().isEmpty()
                     && !contraseña_confirmacion.trim().isEmpty()) {
                 if (contraseña.equals(contraseña_confirmacion)) {
                     try {
-                        if (jc_tipo.getSelectedIndex() == 0) {
+                        con.Conectar();
+
+                        String sql = "select * from usuarios where usuario='" + jb_usuario.getText().trim() + "'";
+                        ResultSet rs = con.Consulta(sql);
+
+                        if (!rs.next()) {
+
                             String hash_password = utilidades.StringToMD5(contraseña);
 
-                            String sql = "insert into usuarios"
+                            sql = "insert into usuarios"
                                     + "(nombres,apellido_paterno,apellido_materno,usuario,contraseña,tipo_usuario,habilitado)"
                                     + " values (?,?,?,?,?,?,?)";
-
-                            con.Conectar();
 
                             PreparedStatement ps = con.InsertPS(sql);
                             ps.setString(1, jb_nombre.getText());
@@ -314,7 +318,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
                             con.Cerrar();
 
-                            JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "¡AVISO!", JOptionPane.INFORMATION_MESSAGE);
 
                             if (lu != null) {
                                 lu.llenarTable();
@@ -322,36 +326,9 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
                             principal.setVisible(true);
                             this.dispose();
-                        } else {
-                            String hash_password = utilidades.StringToMD5(contraseña);
-
-                            String sql = "insert into usuarios"
-                                    + "(nombres,apellido_paterno,apellido_materno,usuario,contraseña,tipo_usuario,habilitado)"
-                                    + " values (?,?,?,?,?,?,?)";
-
-                            con.Conectar();
-
-                            PreparedStatement ps = con.InsertPS(sql);
-                            ps.setString(1, jb_nombre.getText());
-                            ps.setString(2, jb_paterno.getText());
-                            ps.setString(3, jb_materno.getText());
-                            ps.setString(4, jb_usuario.getText());
-                            ps.setString(5, hash_password);
-                            ps.setInt(6, jc_tipo.getSelectedIndex());
-                            ps.setInt(7, 1);
-
-                            ps.executeUpdate();
-
-                            con.Cerrar();
-
-                            JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
-
-                            if (lu != null) {
-                                lu.llenarTable();
-                            }
-
-                            principal.setVisible(true);
-                            this.dispose();
+                        }else
+                        {
+                            JOptionPane.showMessageDialog(null, "Ya existe este usuario.", "¡ERROR!", JOptionPane.ERROR_MESSAGE);
                         }
 
                     } catch (SQLException ex) {

@@ -90,9 +90,9 @@
                                   <Component id="jLabel3" min="-2" pref="96" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jb_nombre" min="-2" pref="271" max="-2" attributes="0"/>
-                                  <Component id="jb_codigo" min="-2" pref="87" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jb_nombre" pref="271" max="32767" attributes="0"/>
+                                  <Component id="jb_codigo" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

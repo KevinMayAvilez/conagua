@@ -111,9 +111,9 @@ public class NuevoTramite extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jb_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jb_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jb_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                            .addComponent(jb_codigo))))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +175,8 @@ public class NuevoTramite extends javax.swing.JFrame {
             try {
                 con.Conectar();
 
-                String sql = "select * from tramites where codigo =" + jb_codigo.getText().trim();
+                String sql = "select * from tramites where codigo ='" + jb_codigo.getText().trim()+"'";
+                System.out.println(sql);
 
                 ResultSet rs = con.Consulta(sql);
 
@@ -196,7 +197,6 @@ public class NuevoTramite extends javax.swing.JFrame {
 
                     JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
 
-                    principal.setVisible(true);
                     this.dispose();
                 }
                 
@@ -214,7 +214,7 @@ public class NuevoTramite extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        principal.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

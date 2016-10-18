@@ -317,54 +317,59 @@ public class EditarUsuario extends javax.swing.JFrame {
 
             String contraseña = String.valueOf(jb_contraseña.getPassword());
             String contraseña_confirmacion = String.valueOf(jb_contraseña2.getPassword());
-            
-                     
+
             if (!jb_usuario.getText().trim().isEmpty() && !contraseña.trim().isEmpty()
                     && !contraseña_confirmacion.trim().isEmpty() || !check_editar.isSelected()) {
                 if (contraseña.equals(contraseña_confirmacion)) {
                     try {
-                        
                         String hash_password = utilidades.StringToMD5(contraseña);
 
-                        String sql = "";
-                        if (!check_editar.isSelected()) {
-                            sql = "update usuarios set "
-                                    + "nombres = ?,"
-                                    + "apellido_paterno = ?,"
-                                    + "apellido_materno = ? "
-                                    + "where id=" + id;
-                        } else {
-                            sql = "update usuarios set "
-                                    + "nombres = ?,"
-                                    + "apellido_paterno = ?,"
-                                    + "apellido_materno = ?,"
-                                    + "usuario = ?,"
-                                    + "contraseña = ?,"
-                                    + "tipo_usuario= ? "
-                                    + "where id=" + id;
-                        }
-
                         con.Conectar();
+                        String sql = "select * from usuarios where usuario='" + jb_usuario.getText().trim() + "' and id !="
+                                + id;
+                        ResultSet rs = con.Consulta(sql);
 
-                        PreparedStatement ps = con.InsertPS(sql);
-                        ps.setString(1, jb_nombre.getText());
-                        ps.setString(2, jb_paterno.getText());
-                        ps.setString(3, jb_materno.getText());
-                        
-                        if (check_editar.isSelected()) {
-                            ps.setString(4, jb_usuario.getText());
-                            ps.setString(5, hash_password);
-                            ps.setInt(6, jc_user.getSelectedIndex());
+                        if (!rs.next()) {
+                            if (!check_editar.isSelected()) {
+                                sql = "update usuarios set "
+                                        + "nombres = ?,"
+                                        + "apellido_paterno = ?,"
+                                        + "apellido_materno = ? "
+                                        + "where id=" + id;
+                            } else {
+                                sql = "update usuarios set "
+                                        + "nombres = ?,"
+                                        + "apellido_paterno = ?,"
+                                        + "apellido_materno = ?,"
+                                        + "usuario = ?,"
+                                        + "contraseña = ?,"
+                                        + "tipo_usuario= ? "
+                                        + "where id=" + id;
+                            }
+
+                            PreparedStatement ps = con.InsertPS(sql);
+                            ps.setString(1, jb_nombre.getText());
+                            ps.setString(2, jb_paterno.getText());
+                            ps.setString(3, jb_materno.getText());
+
+                            if (check_editar.isSelected()) {
+                                ps.setString(4, jb_usuario.getText());
+                                ps.setString(5, hash_password);
+                                ps.setInt(6, jc_user.getSelectedIndex());
+                            }
+
+                            ps.executeUpdate();
+                            con.Cerrar();
+
+                            JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+
+                            lu.llenarTable();
+
+                            this.dispose();
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ya existe este usuario.", "¡ERROR!", JOptionPane.ERROR_MESSAGE);
                         }
-
-                        ps.executeUpdate();
-                        con.Cerrar();
-
-                        JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
-
-                        lu.llenarTable();
-
-                        this.dispose();
 
                     } catch (SQLException ex) {
                         Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);

@@ -6,8 +6,8 @@ package conagua.documentos;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
-import conagua.tramites.NuevoTramite;
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,10 +24,11 @@ public class NuevoError extends javax.swing.JFrame {
     /**
      * Creates new form NuevoError
      */
-   Principal principal;
+    Principal principal;
     Conexion con;
     ArrayList<Integer> ids_tramites;
     ArrayList<Integer> ids_documentos;
+
     public NuevoError() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -37,9 +38,10 @@ public class NuevoError extends javax.swing.JFrame {
         con = new Conexion();
         this.llenarTramites();
         this.llenarDocumento();
-        
+
     }
-        public void llenarTramites() {
+
+    public void llenarTramites() {
         try {
             String sql = "select * from tramites";
 
@@ -48,10 +50,9 @@ public class NuevoError extends javax.swing.JFrame {
 
             while (rs.next()) {
 
-                jc_tramite.addItem(rs.getString("codigo") + "-" + rs.getString("nombre"));
+                jc_tramites.addItem(rs.getString("codigo") + "-" + rs.getString("nombre"));
                 ids_tramites.add(rs.getInt("id"));
             }
-            
             con.Cerrar();
 
         } catch (SQLException ex) {
@@ -59,14 +60,36 @@ public class NuevoError extends javax.swing.JFrame {
         }
 
     }
-        public void llenarDocumento(){
-     
-           int id_tramite = ids_tramites.get(jc_tramite.getSelectedIndex());
-   
-            
-           
+
+    public void llenarDocumento() {
+
+        ids_documentos.clear();
+        jc_documetos.removeAllItems();
+
+        try {
+
+            String sql = "select * from documentos where id_tramite=" + ids_tramites.get(jc_tramites.getSelectedIndex());
+
+            con.Conectar();
+            ResultSet rs = con.Consulta(sql);
+
+            if (rs.next()) {
+                rs.beforeFirst();
+                while (rs.next()) {
+                    jc_documetos.addItem(rs.getString("nombre"));
+                    ids_documentos.add(rs.getInt("id"));
+                    jb_agregar.setEnabled(true);
+                }
+            } else {
+                jc_documetos.addItem("Este tramite no tiene documentos");
+                jb_agregar.setEnabled(false);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoError.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,15 +105,15 @@ public class NuevoError extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jb_descripcionE = new javax.swing.JTextArea();
+        jb_descripcion = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jb_nombreE = new javax.swing.JTextField();
+        jb_agregar = new javax.swing.JButton();
+        jb_error = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jc_docuemto = new javax.swing.JComboBox();
+        jc_documetos = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jc_tramite = new javax.swing.JComboBox();
+        jc_tramites = new javax.swing.JComboBox();
 
         jLabel4.setText("jLabel4");
 
@@ -106,9 +129,9 @@ public class NuevoError extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Descripción");
 
-        jb_descripcionE.setColumns(20);
-        jb_descripcionE.setRows(5);
-        jScrollPane1.setViewportView(jb_descripcionE);
+        jb_descripcion.setColumns(20);
+        jb_descripcion.setRows(5);
+        jScrollPane1.setViewportView(jb_descripcion);
 
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
@@ -119,29 +142,35 @@ public class NuevoError extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jb_agregar.setForeground(new java.awt.Color(51, 51, 51));
+        jb_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
+        jb_agregar.setText("Agregar");
+        jb_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jb_agregarActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Nombre del error");
+        jLabel1.setText("Nombre del Error");
 
         jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Núm. de documento");
+        jLabel5.setText("Documento");
 
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Tipo de tramite");
+
+        jc_tramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_tramitesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -158,13 +187,13 @@ public class NuevoError extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jc_tramite, javax.swing.GroupLayout.Alignment.LEADING, 0, 288, Short.MAX_VALUE)
-                        .addComponent(jc_docuemto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jb_nombreE, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(jc_tramites, javax.swing.GroupLayout.Alignment.LEADING, 0, 288, Short.MAX_VALUE)
+                        .addComponent(jc_documetos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jb_error, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(45, 45, 45)
-                        .addComponent(jButton1)))
+                        .addComponent(jb_agregar)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
@@ -173,16 +202,16 @@ public class NuevoError extends javax.swing.JFrame {
                 .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jc_tramite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jc_tramites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jc_docuemto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jc_documetos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_nombreE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_error, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +219,7 @@ public class NuevoError extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jb_agregar)
                     .addComponent(jButton2))
                 .addGap(25, 25, 25))
         );
@@ -232,38 +261,37 @@ public class NuevoError extends javax.swing.JFrame {
         principal.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jb_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarActionPerformed
         // TODO add your handling code here:
-        /*if (!jb_nombreE.getText().trim().isEmpty() && !jb_descripcionE.getText().trim().isEmpty()  ){
+        if (!jb_error.getText().trim().isEmpty() && !jb_descripcion.getText().trim().isEmpty()) {
             try {
-                //int numeroD = Integer.parseInt(jb_numerodoc.getText());
                 String sql = "insert into errores_documentos"
-                + "(id_documento,error,descripcion)"
-                + " values (?,?,?)";
+                        + "(id_documento,error,descripcion)"
+                        + " values (?,?,?)";
                 con.Conectar();
-
                 PreparedStatement ps = con.InsertPS(sql);
-               // ps.setInt(1, numeroD);
-                ps.setString(2, jb_nombreE.getText());
-                ps.setString(3, jb_descripcionE.getText());
-                
-
+                ps.setInt(1,ids_documentos.get(jc_documetos.getSelectedIndex()));
+                ps.setString(2, jb_error.getText());
+                ps.setString(3, jb_descripcion.getText());
                 ps.executeUpdate();
-
                 con.Cerrar();
                 JOptionPane.showMessageDialog(null, "se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
-                principal.setVisible(true);
                 this.dispose();
             } catch (SQLException ex) {
-                Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NuevoError.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "warning", JOptionPane.WARNING_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jButton1ActionPerformed
-    
-    
+        }
+    }//GEN-LAST:event_jb_agregarActionPerformed
+
+    private void jc_tramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_tramitesActionPerformed
+
+        if (jc_tramites.getSelectedIndex() >= 0 && ids_tramites.size() > 0) {
+            this.llenarDocumento();
+        }
+    }//GEN-LAST:event_jc_tramitesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,7 +327,6 @@ public class NuevoError extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -308,10 +335,11 @@ public class NuevoError extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jb_descripcionE;
-    private javax.swing.JTextField jb_nombreE;
-    private javax.swing.JComboBox jc_docuemto;
-    private javax.swing.JComboBox jc_tramite;
+    private javax.swing.JButton jb_agregar;
+    private javax.swing.JTextArea jb_descripcion;
+    private javax.swing.JTextField jb_error;
+    private javax.swing.JComboBox jc_documetos;
+    private javax.swing.JComboBox jc_tramites;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 }
