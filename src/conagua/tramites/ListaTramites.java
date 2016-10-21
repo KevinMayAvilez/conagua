@@ -69,13 +69,14 @@ public class ListaTramites extends javax.swing.JFrame {
             Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void buscarTramite() {
 
         ids_tramites = new ArrayList<Integer>();
         modelo = new DefaultTableModel(null, columnas);
         String sql = "select * from tramites where "
                 + "nombre like '%" + jb_buscar.getText() + "%' or "
-                + "codigo like '%" + jb_buscar.getText()+ "%'";
+                + "codigo like '%" + jb_buscar.getText() + "%'";
 
         con.Conectar();
         ResultSet rs = con.Consulta(sql);
@@ -99,6 +100,7 @@ public class ListaTramites extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,22 +111,19 @@ public class ListaTramites extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jb_buscar = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        t_tramites = new javax.swing.JTable();
         jb_agregar = new javax.swing.JButton();
         jb_editar = new javax.swing.JButton();
         jb_borrar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        t_tramites = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(633, 287));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -138,18 +137,6 @@ public class ListaTramites extends javax.swing.JFrame {
                 jb_buscarKeyReleased(evt);
             }
         });
-
-        t_tramites.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
-        t_tramites.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        t_tramites.setSelectionBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane1.setViewportView(t_tramites);
 
         jb_agregar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
         jb_agregar.setForeground(new java.awt.Color(102, 102, 102));
@@ -182,60 +169,57 @@ public class ListaTramites extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jb_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jb_editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jb_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jb_agregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jb_editar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jb_borrar)))
-                .addContainerGap())
-        );
+        t_tramites.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
+        t_tramites.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        t_tramites.setSelectionBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane2.setViewportView(t_tramites);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jb_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jb_agregar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_editar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_borrar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,27 +236,9 @@ public class ListaTramites extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_editarActionPerformed
-        // TODO add your handling code here:
-                if (t_tramites.getSelectedRow() > -1) {
-            EditarTramite et = new EditarTramite(this, ids_tramites.get(t_tramites.getSelectedRow()));
-                    System.out.println(ids_tramites.get(t_tramites.getSelectedRow()));
-            et.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un usuario.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_jb_editarActionPerformed
-
-    private void jb_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarActionPerformed
-        // TODO add your handling code here:
-        NuevoTramite tramite = new NuevoTramite(this);
-        tramite.setVisible(true);
-    }//GEN-LAST:event_jb_agregarActionPerformed
-
     private void jb_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_borrarActionPerformed
         // TODO add your handling code here:
-       
+
         /*if (t_tramites.getSelectedRow() > -1) {
             try {
                 String sql = "update tramites where id=" + ids_tramites.get(t_tramites.getSelectedRow());
@@ -291,9 +257,25 @@ public class ListaTramites extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jb_borrarActionPerformed
 
+    private void jb_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_editarActionPerformed
+        // TODO add your handling code here:
+        if (t_tramites.getSelectedRow() > -1) {
+            EditarTramite et = new EditarTramite(this, ids_tramites.get(t_tramites.getSelectedRow()));
+            et.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jb_editarActionPerformed
+
+    private void jb_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarActionPerformed
+        // TODO add your handling code here:
+        NuevoTramite tramite = new NuevoTramite(this);
+        tramite.setVisible(true);
+    }//GEN-LAST:event_jb_agregarActionPerformed
+
     private void jb_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_buscarKeyReleased
         // TODO add your handling code here:
-           if (!jb_buscar.getText().trim().isEmpty()) {
+        if (!jb_buscar.getText().trim().isEmpty()) {
             buscarTramite();
         } else {
             llenarTabla();
@@ -338,8 +320,7 @@ public class ListaTramites extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jb_agregar;
     private javax.swing.JButton jb_borrar;
     private javax.swing.JTextField jb_buscar;

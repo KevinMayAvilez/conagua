@@ -77,9 +77,9 @@ public class NuevoDocumento extends javax.swing.JFrame {
         jb_descripcion = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jc_tramites = new javax.swing.JComboBox<String>();
+        jc_tramites = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -203,47 +203,41 @@ public class NuevoDocumento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (!jb_nomDoc.getText().isEmpty() && !jb_descripcion.getText().isEmpty()){
+        if (!jb_nomDoc.getText().isEmpty() && !jb_descripcion.getText().isEmpty()) {
             try {
                 String sql = "insert into documentos"
-                                    + "(id_tramite, nombre, descripcion)"
-                                    + " values (?,?,?)";
+                        + "(id_tramite, nombre, descripcion)"
+                        + " values (?,?,?)";
                 con.Conectar();
-                
+
                 int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
-                        
+
                 PreparedStatement ps = con.InsertPS(sql);
                 ps.setInt(1, id_tramite);
                 ps.setString(2, jb_nomDoc.getText());
                 ps.setString(3, jb_descripcion.getText());
-                
+
                 ps.executeUpdate();
-                
+
                 con.Cerrar();
                 JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
-                
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan datos.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
 
-
-
-
 //int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
-
-       // System.out.println(id_tramite);
+        // System.out.println(id_tramite);
 
         /*
         if (!jb_tipoTramite.getText().trim().isEmpty() && !jb_nomDoc.getText().trim().isEmpty() && !jb_descripcion.getText().trim().isEmpty() ){

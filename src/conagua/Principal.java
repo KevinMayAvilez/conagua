@@ -9,6 +9,7 @@ import conagua.conexion.Conexion;
 import conagua.dias.inhabiles.AgregarDia;
 import conagua.documentos.NuevoDocumento;
 import conagua.documentos.NuevoError;
+import conagua.tramites.ListaTramites;
 import conagua.tramites.NuevoTramite;
 import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
@@ -27,7 +28,7 @@ public class Principal extends javax.swing.JFrame {
 
     Login login;
     Conexion con;
-    
+
     public Principal() {
         initComponents();
         login = new Login();
@@ -48,11 +49,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -75,6 +79,17 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Tramites");
         jMenu2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
+        jMenuItem7.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem7.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/list2.png"))); // NOI18N
+        jMenuItem7.setText("Lista de Tramites");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
+
         jMenuItem3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem3.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramite2.png"))); // NOI18N
@@ -93,10 +108,16 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.setText("Documentos");
         jMenu4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
+        jMenuItem8.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem8.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/folder.png"))); // NOI18N
+        jMenuItem8.setText("Lista de Documentos");
+        jMenu4.add(jMenuItem8);
+
         jMenuItem6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem6.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/doc2.png"))); // NOI18N
-        jMenuItem6.setText("Documentos");
+        jMenuItem6.setText("Nuevo Documentos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -107,7 +128,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem5.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/error1.png"))); // NOI18N
-        jMenuItem5.setText("Nuevo Error");
+        jMenuItem5.setText("Nuevo Error (Documentos)");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -121,6 +142,12 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias1.png"))); // NOI18N
         jMenu3.setText("Dias Inhabiles");
         jMenu3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+
+        jMenuItem9.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jMenuItem9.setForeground(new java.awt.Color(102, 102, 102));
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/calendar.png"))); // NOI18N
+        jMenuItem9.setText("Días Inhabiles");
+        jMenu3.add(jMenuItem9);
 
         jMenuItem4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem4.setForeground(new java.awt.Color(102, 102, 102));
@@ -226,25 +253,29 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
 
         try {
-            
-            String sql = "select * from tramites";
+
+            String sql = "select *from tramites";
 
             con.Conectar();
             ResultSet rs = con.Consulta(sql);
 
-            while (rs.next()) {
-                if (rs.getInt(1) > 0) {
-                    System.out.println(rs.getInt(1));
-                } else {
-                    JOptionPane.showMessageDialog(null, "No hay documentos", "Error", JOptionPane.WARNING_MESSAGE);
-                }
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "No hay documentos", "Error", JOptionPane.WARNING_MESSAGE);
+            } else {
+                NuevoDocumento n_doc = new NuevoDocumento();
+                n_doc.setVisible(true);
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
         }
-        NuevoDocumento n_doc = new NuevoDocumento();
-        n_doc.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        ListaTramites lt = new ListaTramites();
+        lt.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,5 +327,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
