@@ -6,18 +6,23 @@
 package conagua.tramites;
 
 import conagua.conexion.Conexion;
+import conagua.usuarios.EditarUsuario;
 import conagua.usuarios.ListaUsuarios;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Néstor
+ * @author kevin
  */
 public class ListaTramites extends javax.swing.JFrame {
 
@@ -26,7 +31,7 @@ public class ListaTramites extends javax.swing.JFrame {
      */
     Conexion con;
     DefaultTableModel modelo;
-    String columnas[] = {"Nombre", "Codigo"};
+    String columnas[] = {"Codigo", "Nombre"};
     String empty[] = {"Sin resultados"};
     ArrayList<Integer> ids_tramites;
     Object obj;
@@ -35,46 +40,42 @@ public class ListaTramites extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         con = new Conexion();
-        this.llenarTable();
+        this.llenarTabla();
+
     }
 
-    public void llenarTable() {
-
+    public void llenarTabla() {
         ids_tramites = new ArrayList<Integer>();
         modelo = new DefaultTableModel(null, columnas);
         String sql = "select * from tramites";
         con.Conectar();
         ResultSet rs = con.Consulta(sql);
-
         try {
             if (rs.next()) {
                 rs.beforeFirst();
                 while (rs.next()) {
                     Vector vec = new Vector();
                     ids_tramites.add(rs.getInt("id"));
-                    vec.add(rs.getString("nombre"));
                     vec.add(rs.getString("codigo"));
+                    vec.add(rs.getString("nombre"));
                     modelo.addRow(vec);
                 }
                 t_tramites.setModel(modelo);
             } else {
                 modelo.addRow(empty);
             }
-
             con.Cerrar();
         } catch (SQLException ex) {
             Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-    
-    public void findTramite() {
+    public void buscarTramite() {
 
         ids_tramites = new ArrayList<Integer>();
         modelo = new DefaultTableModel(null, columnas);
         String sql = "select * from tramites where "
-                + "nombre like '%" + jb_search.getText() + "%' or "
-                + "codigo like '%" + jb_search.getText() + "%'";
+                + "nombre like '%" + jb_buscar.getText() + "%' or "
+                + "codigo like '%" + jb_buscar.getText()+ "%'";
 
         con.Conectar();
         ResultSet rs = con.Consulta(sql);
@@ -84,9 +85,8 @@ public class ListaTramites extends javax.swing.JFrame {
                 rs.beforeFirst();
                 while (rs.next()) {
                     Vector vec = new Vector();
-                    ids_tramites.add(rs.getInt("id"));
-                    vec.add(rs.getString("nombre"));
                     vec.add(rs.getString("codigo"));
+                    vec.add(rs.getString("nombre"));
                     modelo.addRow(vec);
                 }
             } else {
@@ -99,7 +99,6 @@ public class ListaTramites extends javax.swing.JFrame {
         }
 
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,13 +108,38 @@ public class ListaTramites extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jb_buscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_tramites = new javax.swing.JTable();
-        jb_search = new javax.swing.JTextField();
+        jb_agregar = new javax.swing.JButton();
+        jb_editar = new javax.swing.JButton();
+        jb_borrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/serach.png"))); // NOI18N
+        jLabel2.setText("Buscar");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        jb_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jb_buscarKeyReleased(evt);
+            }
+        });
+
+        t_tramites.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
         t_tramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -124,57 +148,157 @@ public class ListaTramites extends javax.swing.JFrame {
 
             }
         ));
+        t_tramites.setSelectionBackground(new java.awt.Color(102, 102, 102));
         jScrollPane1.setViewportView(t_tramites);
 
-        jb_search.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jb_searchKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jb_searchKeyTyped(evt);
+        jb_agregar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jb_agregar.setForeground(new java.awt.Color(102, 102, 102));
+        jb_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
+        jb_agregar.setText("Agregar");
+        jb_agregar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jb_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_agregarActionPerformed(evt);
             }
         });
+
+        jb_editar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jb_editar.setForeground(new java.awt.Color(102, 102, 102));
+        jb_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
+        jb_editar.setText("Editar");
+        jb_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_editarActionPerformed(evt);
+            }
+        });
+
+        jb_borrar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jb_borrar.setForeground(new java.awt.Color(102, 102, 102));
+        jb_borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/trash.png"))); // NOI18N
+        jb_borrar.setText("Borrar");
+        jb_borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_borrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jb_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jb_editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jb_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jb_agregar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_editar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_borrar)))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jb_search, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(136, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jb_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_searchKeyTyped
-        
-        
-        
-    }//GEN-LAST:event_jb_searchKeyTyped
-
-    private void jb_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_searchKeyReleased
-         if (!jb_search.getText().trim().isEmpty()) {
-            findTramite();
+    private void jb_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_editarActionPerformed
+        // TODO add your handling code here:
+                if (t_tramites.getSelectedRow() > -1) {
+            EditarTramite et = new EditarTramite(this, ids_tramites.get(t_tramites.getSelectedRow()));
+                    System.out.println(ids_tramites.get(t_tramites.getSelectedRow()));
+            et.setVisible(true);
         } else {
-            llenarTable();
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_jb_searchKeyReleased
+        
+    }//GEN-LAST:event_jb_editarActionPerformed
+
+    private void jb_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarActionPerformed
+        // TODO add your handling code here:
+        NuevoTramite tramite = new NuevoTramite(this);
+        tramite.setVisible(true);
+    }//GEN-LAST:event_jb_agregarActionPerformed
+
+    private void jb_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_borrarActionPerformed
+        // TODO add your handling code here:
+       
+        /*if (t_tramites.getSelectedRow() > -1) {
+            try {
+                String sql = "update tramites where id=" + ids_tramites.get(t_tramites.getSelectedRow());
+                con.Conectar();
+                PreparedStatement ps = con.InsertPS(sql);
+                ps.setInt(1, 0);
+                ps.executeUpdate();
+                con.Cerrar();
+                JOptionPane.showMessageDialog(null, "Se borro correctamente el tramite", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                this.llenarTabla();
+            } catch (SQLException ex) {
+                Logger.getLogger(ListaTramites.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un tramite", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }*/
+    }//GEN-LAST:event_jb_borrarActionPerformed
+
+    private void jb_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_buscarKeyReleased
+        // TODO add your handling code here:
+           if (!jb_buscar.getText().trim().isEmpty()) {
+            buscarTramite();
+        } else {
+            llenarTabla();
+        }
+    }//GEN-LAST:event_jb_buscarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -212,8 +336,14 @@ public class ListaTramites extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jb_search;
+    private javax.swing.JButton jb_agregar;
+    private javax.swing.JButton jb_borrar;
+    private javax.swing.JTextField jb_buscar;
+    private javax.swing.JButton jb_editar;
     private javax.swing.JTable t_tramites;
     // End of variables declaration//GEN-END:variables
 }

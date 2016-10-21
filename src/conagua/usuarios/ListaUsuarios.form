@@ -57,7 +57,7 @@
                       <Component id="jScrollPane2" min="-2" pref="477" max="-2" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jb_search" min="-2" pref="216" max="-2" attributes="0"/>
                       </Group>
                   </Group>

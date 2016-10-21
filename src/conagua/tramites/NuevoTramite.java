@@ -26,13 +26,23 @@ public class NuevoTramite extends javax.swing.JFrame {
      */
     Conexion con;
     Principal principal;
+    ListaTramites lt;
+    
 
+    public NuevoTramite(ListaTramites lt) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        con = new Conexion();
+        principal = new Principal();
+        this.lt = lt;
+          }
     public NuevoTramite() {
         initComponents();
         this.setLocationRelativeTo(null);
         con = new Conexion();
         principal = new Principal();
-    }
+        
+          }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -196,12 +206,17 @@ public class NuevoTramite extends javax.swing.JFrame {
                     con.Cerrar();
 
                     JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    if(lt != null){
+                        lt.llenarTabla();
+                    }
 
                     this.dispose();
                 }
                 
                 con.Cerrar();
 
+                
             } catch (SQLException ex) {
                 Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -250,7 +265,7 @@ public class NuevoTramite extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoTramite().setVisible(true);
+                new NuevoTramite(null).setVisible(true);
             }
         });
     }
