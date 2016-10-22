@@ -8,12 +8,14 @@ package conagua.tramites;
 import conagua.Principal;
 import conagua.conexion.Conexion;
 import conagua.usuarios.EditarUsuario;
-import conagua.usuarios.ListaUsuarios;
 import conagua.utilidades.Utilidades;
+import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -74,7 +76,7 @@ public class EditarTramite extends javax.swing.JFrame {
         jb_codigo = new javax.swing.JTextField();
         jb_nombre = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        b_guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,11 +100,11 @@ public class EditarTramite extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        b_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
+        b_guardar.setText("Guardar");
+        b_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                b_guardarActionPerformed(evt);
             }
         });
 
@@ -120,7 +122,7 @@ public class EditarTramite extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addComponent(b_guardar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -140,7 +142,7 @@ public class EditarTramite extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton2)))
+                            .addComponent(b_guardar)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -166,9 +168,49 @@ public class EditarTramite extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void b_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_guardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (!jb_nombre.getText().trim().isEmpty() && !jb_codigo.getText().trim().isEmpty()) {
+
+            try {
+
+                String sql = "select * from tramites where nombre='" + jb_nombre.getText().trim() + "' and id =" + id;
+                
+                con.Conectar();
+                ResultSet rs = con.Consulta(sql);
+                
+                System.out.println(sql);
+                
+                if(!rs.next()){
+                
+                sql = "update tramites set "
+                        + "nombre = ?,"
+                        + "codigo = ?,"
+                        + "where id=" + id;
+
+                PreparedStatement ps = con.InsertPS(sql);
+                ps.setString(1, jb_nombre.getText());
+                ps.setString(2, jb_codigo.getText());
+
+                ps.executeUpdate();
+                con.Cerrar();
+                System.out.println(sql);
+                JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+
+                lt.llenarTabla();
+
+                this.dispose();
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Faltan datos.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }//GEN-LAST:event_b_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,8 +248,8 @@ public class EditarTramite extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b_guardar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

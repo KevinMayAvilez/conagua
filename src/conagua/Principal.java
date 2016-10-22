@@ -112,6 +112,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem8.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/folder.png"))); // NOI18N
         jMenuItem8.setText("Lista de Documentos");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem8);
 
         jMenuItem6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
@@ -276,6 +281,12 @@ public class Principal extends javax.swing.JFrame {
         ListaTramites lt = new ListaTramites();
         lt.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        ListaUsuarios lu = new ListaUsuarios();
+        lu.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
