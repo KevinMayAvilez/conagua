@@ -72,6 +72,13 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(428, 213, 100, 30);
+
+        jb_usuario.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jb_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_usuarioActionPerformed(evt);
+            }
+        });
         getContentPane().add(jb_usuario);
         jb_usuario.setBounds(532, 172, 216, 30);
 
@@ -87,6 +94,13 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(jb_login);
         jb_login.setBounds(638, 271, 110, 41);
+
+        jb_contraseña.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jb_contraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_contraseñaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jb_contraseña);
         jb_contraseña.setBounds(532, 215, 216, 30);
 
@@ -149,7 +163,7 @@ public class Login extends javax.swing.JFrame {
 
                 } else {
 
-                    JOptionPane.showMessageDialog(null, "No se encontro el usuario", "¡Error!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No se encontró el usuario", "¡Error!", JOptionPane.ERROR_MESSAGE);
 
                 }
 
@@ -163,6 +177,14 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Llene los datos de acceso.", "¡Error!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jb_loginActionPerformed
+
+    private void jb_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_usuarioActionPerformed
+
+    private void jb_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_contraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_contraseñaActionPerformed
 
     /**
      * @param args the command line arguments

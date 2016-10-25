@@ -76,13 +76,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu2.setForeground(new java.awt.Color(51, 51, 51));
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramites1.png"))); // NOI18N
-        jMenu2.setText("Tramites");
+        jMenu2.setText("Trámites");
         jMenu2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
         jMenuItem7.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem7.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/list2.png"))); // NOI18N
-        jMenuItem7.setText("Lista de Tramites");
+        jMenuItem7.setText("Lista de Trámites");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -93,7 +93,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem3.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/tramite2.png"))); // NOI18N
-        jMenuItem3.setText("Nuevo Tramite");
+        jMenuItem3.setText("Nuevo Trámite");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -134,13 +134,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu3.setForeground(new java.awt.Color(51, 51, 51));
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias1.png"))); // NOI18N
-        jMenu3.setText("Dias Inhabiles");
+        jMenu3.setText("Días Inhábiles");
         jMenu3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
         jMenuItem9.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem9.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/calendar.png"))); // NOI18N
-        jMenuItem9.setText("Días Inhabiles");
+        jMenuItem9.setText("Días Inhábiles");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -151,7 +151,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem4.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/dias2.png"))); // NOI18N
-        jMenuItem4.setText("Agregar Dias");
+        jMenuItem4.setText("Agregar Días");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
