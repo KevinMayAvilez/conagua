@@ -7,6 +7,7 @@ package conagua;
 
 import conagua.conexion.Conexion;
 import conagua.dias.inhabiles.AgregarDia;
+import conagua.documentos.ListaDocumentos;
 import conagua.documentos.NuevoDocumento;
 import conagua.documentos.NuevoError;
 import conagua.tramites.ListaTramites;
@@ -54,7 +55,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -130,17 +130,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem6);
 
-        jMenuItem5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jMenuItem5.setForeground(new java.awt.Color(102, 102, 102));
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/error1.png"))); // NOI18N
-        jMenuItem5.setText("Nuevo Error (Documentos)");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem5);
-
         jMenuBar1.add(jMenu4);
 
         jMenu3.setForeground(new java.awt.Color(51, 51, 51));
@@ -152,6 +141,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem9.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/calendar.png"))); // NOI18N
         jMenuItem9.setText("Días Inhabiles");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuItem4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
@@ -247,14 +241,6 @@ public class Principal extends javax.swing.JFrame {
         l_usuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-
-        NuevoError n_error = new NuevoError();
-        n_error.setVisible(true);
-
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
 
         try {
@@ -284,9 +270,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-        ListaUsuarios lu = new ListaUsuarios();
-        lu.setVisible(true);
+        ListaDocumentos ld = new ListaDocumentos();
+        ld.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,7 +326,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;

@@ -9,8 +9,8 @@ import conagua.Principal;
 import conagua.conexion.Conexion;
 import conagua.usuarios.EditarUsuario;
 import conagua.utilidades.Utilidades;
-import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -174,32 +174,31 @@ public class EditarTramite extends javax.swing.JFrame {
 
             try {
 
-                String sql = "select * from tramites where nombre='" + jb_nombre.getText().trim() + "' and id =" + id;
-                
+                String sql = "select * from tramites where "
+                        + "codigo='" + jb_codigo.getText().trim() + "' and id !=" + id;
+
                 con.Conectar();
                 ResultSet rs = con.Consulta(sql);
-                
-                System.out.println(sql);
-                
-                if(!rs.next()){
-                
-                sql = "update tramites set "
-                        + "nombre = ?,"
-                        + "codigo = ?,"
-                        + "where id=" + id;
 
-                PreparedStatement ps = con.InsertPS(sql);
-                ps.setString(1, jb_nombre.getText());
-                ps.setString(2, jb_codigo.getText());
+                if (!rs.next()) {
 
-                ps.executeUpdate();
-                con.Cerrar();
-                System.out.println(sql);
-                JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                    sql = "update tramites set "
+                            + "nombre = ?,"
+                            + "codigo = ?"
+                            + "where id=" + id;
 
-                lt.llenarTabla();
+                    PreparedStatement ps = con.InsertPS(sql);
+                    ps.setString(1, jb_nombre.getText());
+                    ps.setString(2, jb_codigo.getText());
+                    ps.executeUpdate();
+                    con.Cerrar();
 
-                this.dispose();
+                    JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                    lt.llenarTabla();
+                    this.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "El codigo ya existe", "¡WARNING!", JOptionPane.ERROR_MESSAGE);
                 }
 
             } catch (SQLException ex) {

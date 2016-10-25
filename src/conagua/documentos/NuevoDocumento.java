@@ -75,9 +75,9 @@ public class NuevoDocumento extends javax.swing.JFrame {
         jb_nomDoc = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jb_descripcion = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        b_agregar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jc_tramites = new javax.swing.JComboBox<>();
+        jc_tramites = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,13 +105,13 @@ public class NuevoDocumento extends javax.swing.JFrame {
         jb_descripcion.setRows(5);
         jScrollPane1.setViewportView(jb_descripcion);
 
-        jButton1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        b_agregar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
+        b_agregar.setForeground(new java.awt.Color(102, 102, 102));
+        b_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
+        b_agregar.setText("Agregar");
+        b_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                b_agregarActionPerformed(evt);
             }
         });
 
@@ -146,7 +146,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(73, 73, 73)
-                        .addComponent(jButton1)))
+                        .addComponent(b_agregar)))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -166,7 +166,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(b_agregar)
                     .addComponent(jButton2))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -206,7 +206,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void b_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_agregarActionPerformed
 
         if (!jb_nomDoc.getText().isEmpty() && !jb_descripcion.getText().isEmpty()) {
             try {
@@ -268,7 +268,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "warning", JOptionPane.WARNING_MESSAGE);
         }
          */
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_b_agregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,7 +307,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton b_agregar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

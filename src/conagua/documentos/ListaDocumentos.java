@@ -5,6 +5,17 @@
  */
 package conagua.documentos;
 
+import conagua.Principal;
+import conagua.conexion.Conexion;
+import conagua.usuarios.ListaUsuarios;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Néstor
@@ -14,8 +25,140 @@ public class ListaDocumentos extends javax.swing.JFrame {
     /**
      * Creates new form ListaDocumentos
      */
+    Principal principal;
+    Conexion con;
+    ArrayList<Integer> ids_tramites;
+    ArrayList<Integer> ids_documentos;
+    ArrayList<Integer> ids_errores;
+    DefaultTableModel modelo;
+    String columnas[] = {"Documentos"};
+    String empty[] = {"Sin resultados"};
+    Object obj;
+
+    DefaultListModel<String> listDocumentos;
+    DefaultListModel<String> listErrores;
+
     public ListaDocumentos() {
+        ids_tramites = new ArrayList<Integer>();
+        ids_documentos = new ArrayList<Integer>();
         initComponents();
+        this.setLocationRelativeTo(null);
+        principal = new Principal();
+        con = new Conexion();
+        this.llenarTramites();
+        this.llenarDocumentos();
+
+    }
+
+    public void llenarTramites() {
+        try {
+            String sql = "select * from tramites";
+            con.Conectar();
+            ResultSet rs = con.Consulta(sql);
+            while (rs.next()) {
+                jc_tramites.addItem(rs.getString("codigo") + "-" + rs.getString("nombre"));
+                ids_tramites.add(rs.getInt("id"));
+            }
+            con.Cerrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    /*
+     public void llenarDocumentos() {
+     int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
+     ids_documentos = new ArrayList<Integer>();
+     modelo = new DefaultTableModel(null, columnas);
+     String sql = "select * from documentos where id_tramite =" + id_tramite;
+     con.Conectar();
+     ResultSet rs = con.Consulta(sql);
+
+     try {
+     if (rs.next()) {
+     rs.beforeFirst();
+     while (rs.next()) {
+     Vector vec = new Vector();
+     ids_tramites.add(rs.getInt("id"));
+     vec.add(rs.getString("nombre"));
+     modelo.addRow(vec);
+     }
+     t_doc_error.setModel(modelo);
+     } else {
+     modelo.addRow(empty);
+     }
+
+     con.Cerrar();
+     } catch (SQLException ex) {
+     Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+     }
+
+     }
+    
+     */
+    public void llenarDocumentos() {
+        int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
+        ids_documentos = new ArrayList<Integer>();
+        listDocumentos = new DefaultListModel<>();
+
+        String sql = "select * from documentos where id_tramite =" + id_tramite;
+        con.Conectar();
+        ResultSet rs = con.Consulta(sql);
+        try {
+            if (rs.next()) {
+                rs.beforeFirst();
+                while (rs.next()) {
+                    ids_documentos.add(rs.getInt("id"));
+                    listDocumentos.addElement(rs.getString("nombre"));
+                }        
+
+            } else {
+                listDocumentos.addElement("Sin Elementos");
+            }
+
+             list_documentos.setModel(listDocumentos);
+            this.cleanListErrores();
+
+            con.Cerrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void llenarErrores(int id_documento) {
+        ids_errores = new ArrayList<Integer>();
+        listErrores = new DefaultListModel<>();
+
+        String sql = "select * from errores_documentos where id_documento =" + id_documento;
+        con.Conectar();
+        ResultSet rs = con.Consulta(sql);
+
+        try {
+            if (rs.next()) {
+                rs.beforeFirst();
+                while (rs.next()) {
+                    ids_errores.add(rs.getInt("id"));
+                    listErrores.addElement(rs.getString("error"));
+                }
+
+            } else {
+                this.cleanListErrores();
+                listErrores.addElement("Sin Elementos");
+            }
+
+            list_errores.setModel(listErrores);
+
+            con.Cerrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void cleanListErrores() {
+        listErrores = new DefaultListModel<>();
+        list_errores.setModel(listErrores);
+
     }
 
     /**
@@ -27,21 +170,104 @@ public class ListaDocumentos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jc_tramites = new javax.swing.JComboBox();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        list_documentos = new javax.swing.JList();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        list_errores = new javax.swing.JList();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Tipo de Tramite");
+
+        jc_tramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_tramitesActionPerformed(evt);
+            }
+        });
+
+        list_documentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        list_documentos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                list_documentosValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(list_documentos);
+
+        list_errores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jScrollPane1.setViewportView(list_errores);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jc_tramites, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(371, 371, 371))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jc_tramites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 13, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 772, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jc_tramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_tramitesActionPerformed
+
+        if (ids_tramites.size() > 0) {
+            this.llenarDocumentos();
+        }
+    }//GEN-LAST:event_jc_tramitesActionPerformed
+
+    private void list_documentosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_documentosValueChanged
+
+        if (ids_documentos.size() > 0 && list_documentos.getSelectedIndex() > -1) {
+            this.llenarErrores(ids_documentos.get(list_documentos.getSelectedIndex()));
+        }
+
+
+    }//GEN-LAST:event_list_documentosValueChanged
 
     /**
      * @param args the command line arguments
@@ -79,5 +305,12 @@ public class ListaDocumentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JComboBox jc_tramites;
+    private javax.swing.JList list_documentos;
+    private javax.swing.JList list_errores;
     // End of variables declaration//GEN-END:variables
 }
