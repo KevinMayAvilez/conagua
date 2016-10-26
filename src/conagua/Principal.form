@@ -103,7 +103,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/conagua/imagenes/icons/doc2.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nuevo Documentos"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Documento"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
@@ -136,7 +136,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/conagua/imagenes/icons/calendar.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="D&#xed;as Inh&#xe1;biles"/>
+                <Property name="text" type="java.lang.String" value="Mostrar D&#xed;as "/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>

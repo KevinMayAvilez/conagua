@@ -132,7 +132,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        t_usuarios.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
+        t_usuarios.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         t_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -144,7 +144,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
         t_usuarios.setSelectionBackground(new java.awt.Color(102, 102, 102));
         jScrollPane2.setViewportView(t_usuarios);
 
-        jb_search.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
+        jb_search.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jb_searchKeyReleased(evt);
@@ -152,14 +152,14 @@ public class ListaUsuarios extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/serach.png"))); // NOI18N
         jLabel2.setText("Buscar");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
         jButton1.setText("Agregar");
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -170,8 +170,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(102, 102, 102));
+        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
         jButton2.setText("Editar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -180,8 +180,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(102, 102, 102));
+        jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(51, 51, 51));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/trash.png"))); // NOI18N
         jButton3.setText("Borrar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -206,8 +206,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,17 +216,18 @@ public class ListaUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(46, 46, 46)))
-                .addGap(25, 25, 25))
+                        .addComponent(jButton3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

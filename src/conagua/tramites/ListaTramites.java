@@ -120,26 +120,27 @@ public class ListaTramites extends javax.swing.JFrame {
         t_tramites = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(633, 287));
+        setTitle("Trámites");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/serach.png"))); // NOI18N
         jLabel2.setText("Buscar");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
+        jb_buscar.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jb_buscarKeyReleased(evt);
             }
         });
 
-        jb_agregar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jb_agregar.setForeground(new java.awt.Color(102, 102, 102));
+        jb_agregar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jb_agregar.setForeground(new java.awt.Color(51, 51, 51));
         jb_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
         jb_agregar.setText("Agregar");
         jb_agregar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -149,8 +150,8 @@ public class ListaTramites extends javax.swing.JFrame {
             }
         });
 
-        jb_editar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jb_editar.setForeground(new java.awt.Color(102, 102, 102));
+        jb_editar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jb_editar.setForeground(new java.awt.Color(51, 51, 51));
         jb_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
         jb_editar.setText("Editar");
         jb_editar.addActionListener(new java.awt.event.ActionListener() {
@@ -159,8 +160,8 @@ public class ListaTramites extends javax.swing.JFrame {
             }
         });
 
-        jb_borrar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jb_borrar.setForeground(new java.awt.Color(102, 102, 102));
+        jb_borrar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jb_borrar.setForeground(new java.awt.Color(51, 51, 51));
         jb_borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/trash.png"))); // NOI18N
         jb_borrar.setText("Borrar");
         jb_borrar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +170,7 @@ public class ListaTramites extends javax.swing.JFrame {
             }
         });
 
-        t_tramites.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 12)); // NOI18N
+        t_tramites.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         t_tramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -185,41 +186,38 @@ public class ListaTramites extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jb_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                        .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_agregar))
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jb_agregar)
-                        .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
                         .addComponent(jb_editar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jb_borrar))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addGap(30, 30, 30)
+                        .addComponent(jb_borrar)))
+                .addGap(65, 65, 65))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

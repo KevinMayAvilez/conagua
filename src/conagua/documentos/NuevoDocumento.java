@@ -80,33 +80,37 @@ public class NuevoDocumento extends javax.swing.JFrame {
         jc_tramites = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agregar nuevo documento");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Tipo de Tramite");
+        jLabel1.setText("Tipo de Trámite");
 
-        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nombre del Documento");
 
-        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Deescripcion");
+        jLabel3.setText("Descripción");
+
+        jb_nomDoc.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
 
         jb_descripcion.setColumns(20);
+        jb_descripcion.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_descripcion.setRows(5);
         jScrollPane1.setViewportView(jb_descripcion);
 
-        b_agregar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        b_agregar.setForeground(new java.awt.Color(102, 102, 102));
+        b_agregar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
+        b_agregar.setForeground(new java.awt.Color(51, 51, 51));
         b_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
         b_agregar.setText("Agregar");
         b_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,14 +119,20 @@ public class NuevoDocumento extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(102, 102, 102));
+        jButton2.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.setToolTipText("");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jc_tramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_tramitesActionPerformed(evt);
             }
         });
 
@@ -145,9 +155,9 @@ public class NuevoDocumento extends javax.swing.JFrame {
                             .addComponent(jc_tramites, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(73, 73, 73)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(b_agregar)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,11 +174,11 @@ public class NuevoDocumento extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b_agregar)
                     .addComponent(jButton2))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -225,7 +235,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
                 ps.executeUpdate();
 
                 con.Cerrar();
-                JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se guardó correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
 
             } catch (SQLException ex) {
@@ -233,7 +243,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Faltan datos.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Faltán datos.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
 
 //int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
@@ -269,6 +279,10 @@ public class NuevoDocumento extends javax.swing.JFrame {
         }
          */
     }//GEN-LAST:event_b_agregarActionPerformed
+
+    private void jc_tramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_tramitesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jc_tramitesActionPerformed
 
     /**
      * @param args the command line arguments

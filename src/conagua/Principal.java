@@ -122,7 +122,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem6.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/doc2.png"))); // NOI18N
-        jMenuItem6.setText("Nuevo Documentos");
+        jMenuItem6.setText("Nuevo Documento");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -140,7 +140,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem9.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jMenuItem9.setForeground(new java.awt.Color(102, 102, 102));
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/calendar.png"))); // NOI18N
-        jMenuItem9.setText("Días Inhábiles");
+        jMenuItem9.setText("Mostrar Días ");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);

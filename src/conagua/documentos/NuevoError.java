@@ -81,7 +81,7 @@ public class NuevoError extends javax.swing.JFrame {
                     jb_agregar.setEnabled(true);
                 }
             } else {
-                jc_documetos.addItem("Este tramite no tiene documentos");
+                jc_documetos.addItem("Este trámite no tiene documentos");
                 jb_agregar.setEnabled(false);
             }
 
@@ -118,21 +118,24 @@ public class NuevoError extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agregar nuevo error");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         panel.setBackground(new java.awt.Color(255, 255, 255));
         panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Descripción");
 
         jb_descripcion.setColumns(20);
+        jb_descripcion.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_descripcion.setRows(5);
         jScrollPane1.setViewportView(jb_descripcion);
 
+        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
         jButton2.setText("Cancelar");
@@ -142,6 +145,7 @@ public class NuevoError extends javax.swing.JFrame {
             }
         });
 
+        jb_agregar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jb_agregar.setForeground(new java.awt.Color(51, 51, 51));
         jb_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
         jb_agregar.setText("Agregar");
@@ -151,20 +155,28 @@ public class NuevoError extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jb_error.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Nombre del Error");
 
-        jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Documento");
 
-        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jc_documetos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_documetosActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Tipo de tramite");
+        jLabel3.setText("Tipo de trámite");
 
         jc_tramites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,7 +204,7 @@ public class NuevoError extends javax.swing.JFrame {
                         .addComponent(jb_error, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(45, 45, 45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jb_agregar)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
@@ -238,7 +250,7 @@ public class NuevoError extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,13 +287,13 @@ public class NuevoError extends javax.swing.JFrame {
                 ps.setString(3, jb_descripcion.getText());
                 ps.executeUpdate();
                 con.Cerrar();
-                JOptionPane.showMessageDialog(null, "se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se guardó correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(NuevoError.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Faltán datos por llenar.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jb_agregarActionPerformed
 
@@ -291,6 +303,10 @@ public class NuevoError extends javax.swing.JFrame {
             this.llenarDocumento();
         }
     }//GEN-LAST:event_jc_tramitesActionPerformed
+
+    private void jc_documetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_documetosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jc_documetosActionPerformed
 
     /**
      * @param args the command line arguments

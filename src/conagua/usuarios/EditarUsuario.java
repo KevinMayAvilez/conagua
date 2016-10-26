@@ -88,7 +88,7 @@ public class EditarUsuario extends javax.swing.JFrame {
         jb_materno = new javax.swing.JTextField();
         jb_contraseña = new javax.swing.JPasswordField();
         jb_usuario = new javax.swing.JTextField();
-        jc_user = new javax.swing.JComboBox<>();
+        jc_user = new javax.swing.JComboBox<String>();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -101,6 +101,7 @@ public class EditarUsuario extends javax.swing.JFrame {
         jLabel9.setText("Datos Personales");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar usuario");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -154,11 +155,11 @@ public class EditarUsuario extends javax.swing.JFrame {
         jb_usuario.setEnabled(false);
 
         jc_user.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
-        jc_user.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Administrador" }));
+        jc_user.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Administrador" }));
         jc_user.setEnabled(false);
 
-        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(102, 102, 102));
+        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -167,8 +168,8 @@ public class EditarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

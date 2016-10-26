@@ -83,7 +83,7 @@ public class Login extends javax.swing.JFrame {
         jb_usuario.setBounds(532, 172, 216, 30);
 
         jb_login.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jb_login.setForeground(new java.awt.Color(102, 102, 102));
+        jb_login.setForeground(new java.awt.Color(51, 51, 51));
         jb_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/login2.png"))); // NOI18N
         jb_login.setText("Login");
         jb_login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);

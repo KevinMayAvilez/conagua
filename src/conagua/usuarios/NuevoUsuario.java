@@ -84,6 +84,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
         jLabel9.setText("Datos Personales");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar usuario");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -140,8 +141,13 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
         jc_tipo.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jc_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Administrador" }));
+        jc_tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_tipoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
         jButton2.setText("Cancelar");
@@ -151,7 +157,7 @@ public class NuevoUsuario extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
         jButton1.setText("Agregar");
@@ -355,6 +361,10 @@ public class NuevoUsuario extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jc_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_tipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jc_tipoActionPerformed
 
     /**
      * @param args the command line arguments
