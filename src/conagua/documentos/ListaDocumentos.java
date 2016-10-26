@@ -111,13 +111,13 @@ public class ListaDocumentos extends javax.swing.JFrame {
                 while (rs.next()) {
                     ids_documentos.add(rs.getInt("id"));
                     listDocumentos.addElement(rs.getString("nombre"));
-                }        
+                }
 
             } else {
                 listDocumentos.addElement("Sin Elementos");
             }
 
-             list_documentos.setModel(listDocumentos);
+            list_documentos.setModel(listDocumentos);
             this.cleanListErrores();
 
             con.Cerrar();
@@ -177,6 +177,9 @@ public class ListaDocumentos extends javax.swing.JFrame {
         list_documentos = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
         list_errores = new javax.swing.JList();
+        jb_addDocumento = new javax.swing.JButton();
+        jb_addError = new javax.swing.JButton();
+        jb_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -204,24 +207,57 @@ public class ListaDocumentos extends javax.swing.JFrame {
         list_errores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane1.setViewportView(list_errores);
 
+        jb_addDocumento.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jb_addDocumento.setForeground(new java.awt.Color(51, 51, 51));
+        jb_addDocumento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
+        jb_addDocumento.setText("Agregar Documento");
+        jb_addDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_addDocumentoActionPerformed(evt);
+            }
+        });
+
+        jb_addError.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jb_addError.setForeground(new java.awt.Color(51, 51, 51));
+        jb_addError.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_add.png"))); // NOI18N
+        jb_addError.setText("Agregar Error");
+        jb_addError.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_addErrorActionPerformed(evt);
+            }
+        });
+
+        jb_cancelar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
+        jb_cancelar.setForeground(new java.awt.Color(51, 51, 51));
+        jb_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
+        jb_cancelar.setText("Cancelar");
+        jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_cancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jc_tramites, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(371, 371, 371))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jc_tramites, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jb_addDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_addError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,20 +266,27 @@ public class ListaDocumentos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jc_tramites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 13, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jb_addDocumento)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_addError)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_cancelar)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,6 +311,20 @@ public class ListaDocumentos extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_list_documentosValueChanged
+
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jb_cancelarActionPerformed
+
+    private void jb_addDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_addDocumentoActionPerformed
+        NuevoDocumento nd = new NuevoDocumento( );
+        nd.setVisible(true);
+    }//GEN-LAST:event_jb_addDocumentoActionPerformed
+
+    private void jb_addErrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_addErrorActionPerformed
+        NuevoError ne = new NuevoError();
+        ne.setVisible(true);
+    }//GEN-LAST:event_jb_addErrorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +366,9 @@ public class ListaDocumentos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton jb_addDocumento;
+    private javax.swing.JButton jb_addError;
+    private javax.swing.JButton jb_cancelar;
     private javax.swing.JComboBox jc_tramites;
     private javax.swing.JList list_documentos;
     private javax.swing.JList list_errores;
