@@ -7,7 +7,6 @@ package conagua.documentos;
 
 import conagua.Principal;
 import conagua.conexion.Conexion;
-import conagua.usuarios.EditarUsuario;
 import conagua.usuarios.ListaUsuarios;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -150,7 +149,6 @@ public class ListaDocumentos extends javax.swing.JFrame {
         list_errores = new javax.swing.JList();
         jb_addDocumento = new javax.swing.JButton();
         jb_addError = new javax.swing.JButton();
-        jb_cancelar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -201,16 +199,6 @@ public class ListaDocumentos extends javax.swing.JFrame {
             }
         });
 
-        jb_cancelar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 12)); // NOI18N
-        jb_cancelar.setForeground(new java.awt.Color(51, 51, 51));
-        jb_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
-        jb_cancelar.setText("Cancelar");
-        jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_cancelarActionPerformed(evt);
-            }
-        });
-
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
         jButton1.setText("Editar Documento");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +209,11 @@ public class ListaDocumentos extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
         jButton2.setText("Editar Error");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -239,9 +232,6 @@ public class ListaDocumentos extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jb_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1))
                             .addComponent(jb_addError)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -270,10 +260,8 @@ public class ListaDocumentos extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jb_addError)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jb_cancelar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButton2)))
+                        .addGap(0, 357, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -307,10 +295,6 @@ public class ListaDocumentos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_list_documentosValueChanged
 
-    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jb_cancelarActionPerformed
-
     private void jb_addErrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_addErrorActionPerformed
         NuevoError ne = new NuevoError(this, jc_tramites.getSelectedIndex(),list_documentos.getSelectedIndex());
         ne.setVisible(true);
@@ -324,12 +308,21 @@ public class ListaDocumentos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
           if (list_documentos.getSelectedIndex()> -1) {
-            EditarDocumento ed = new EditarDocumento(this, ids_documentos.get(list_documentos.getSelectedIndex()));
+            EditarDocumento ed = new EditarDocumento(this, ids_documentos.get(list_documentos.getSelectedIndex()),ids_tramites.get(jc_tramites.getSelectedIndex()));
             ed.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un usuario.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Seleccione un documento.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         if (list_documentos.getSelectedIndex()> -1) {
+            EditarError ee = new EditarError(this, ids_errores.get(list_errores.getSelectedIndex()),ids_documentos.get(list_documentos.getSelectedIndex()));
+            ee.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un error.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -375,7 +368,6 @@ public class ListaDocumentos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton jb_addDocumento;
     private javax.swing.JButton jb_addError;
-    private javax.swing.JButton jb_cancelar;
     private javax.swing.JComboBox jc_tramites;
     private javax.swing.JList list_documentos;
     private javax.swing.JList list_errores;

@@ -334,7 +334,6 @@ public class NuevoUsuario extends javax.swing.JFrame {
                                 lu.llenarTable();
                             }
 
-                            principal.setVisible(true);
                             this.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "Ya existe este usuario.", "¡ERROR!", JOptionPane.ERROR_MESSAGE);

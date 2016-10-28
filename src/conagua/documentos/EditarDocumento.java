@@ -3,32 +3,33 @@ package conagua.documentos;
 import conagua.Principal;
 import conagua.conexion.Conexion;
 import conagua.usuarios.EditarUsuario;
-import conagua.utilidades.Utilidades;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class EditarDocumento extends javax.swing.JFrame {
 
     Principal principal;
     Conexion con;
-    Utilidades utilidades;
     ListaDocumentos ld;
     int id;
+    int id_tramite;
 
-    public EditarDocumento(ListaDocumentos ld, int id) {
+    public EditarDocumento(ListaDocumentos ld, int id, int id_tramite) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.ld = ld;
         this.id = id;
+        this.id_tramite = id_tramite;
         principal = new Principal();
         con = new Conexion();
-        utilidades = new Utilidades();
         this.llenarCampos();
 
     }
-    
+
     public void llenarCampos() {
 
         try {
@@ -40,7 +41,6 @@ public class EditarDocumento extends javax.swing.JFrame {
             while (rs.next()) {
                 jb_nombre.setText(rs.getString("nombre"));
                 jb_descripcion.setText(rs.getString("descripcion"));
-                
 
             }
         } catch (SQLException ex) {
@@ -48,8 +48,6 @@ public class EditarDocumento extends javax.swing.JFrame {
         }
 
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,7 +62,7 @@ public class EditarDocumento extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -82,9 +80,21 @@ public class EditarDocumento extends javax.swing.JFrame {
         jb_descripcion.setRows(5);
         jScrollPane1.setViewportView(jb_descripcion);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_edit.png"))); // NOI18N
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/boton_cancel.png"))); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,7 +116,7 @@ public class EditarDocumento extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,19 +140,60 @@ public class EditarDocumento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!jb_nombre.getText().trim().isEmpty() && !jb_descripcion.getText().trim().isEmpty()) {
+            try {
+                con.Conectar();
+                String sql = "select * from documentos where nombre='" + jb_nombre.getText().trim() + "' and id !="
+                        + id + " and id_tramite = " + id_tramite;
+                ResultSet rs = con.Consulta(sql);
+
+                if (!rs.next()) {
+
+                    sql = "update documentos set "
+                            + "nombre = ?,"
+                            + "descripcion = ?"
+                            + "where id=" + id;
+
+                    PreparedStatement ps = con.InsertPS(sql);
+                    ps.setString(1, jb_nombre.getText());
+                    ps.setString(2, jb_descripcion.getText());
+
+                    ps.executeUpdate();
+                    con.Cerrar();
+
+                    JOptionPane.showMessageDialog(null, "Se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
+
+                    ld.llenarDocumentos();
+
+                    this.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ya existe este documento.", "¡ERROR!", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(EditarDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Faltan datos.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,7 +225,7 @@ public class EditarDocumento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarDocumento(null, 0).setVisible(true);
+                new EditarDocumento(null, 0, 0).setVisible(true);
             }
         });
     }

@@ -12,6 +12,11 @@ import conagua.tramites.ListaTramites;
 import conagua.tramites.NuevoTramite;
 import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -228,9 +233,24 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-        ListaDocumentos ld = new ListaDocumentos();
-        ld.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            String sql = "select count(*) from tramites";
+            con = new Conexion();
+            con.Conectar();
+            ResultSet rs =  con.Consulta(sql);
+            while(rs.next()){
+                if(rs.getInt(1)>0){
+                ListaDocumentos ld = new ListaDocumentos();
+                ld.setVisible(true);
+            }else{
+                
+                JOptionPane.showMessageDialog(null, "No hay tramites","Aviso",JOptionPane.WARNING_MESSAGE);
+            }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
