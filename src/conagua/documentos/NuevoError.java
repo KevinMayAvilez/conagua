@@ -28,67 +28,77 @@ public class NuevoError extends javax.swing.JFrame {
     Conexion con;
     ArrayList<Integer> ids_tramites;
     ArrayList<Integer> ids_documentos;
-
-    public NuevoError() {
+    ListaDocumentos le;
+    int indexT;
+    int indexD;
+    
+    public NuevoError(ListaDocumentos le, int indexT, int indexD) {
         initComponents();
         this.setLocationRelativeTo(null);
         ids_tramites = new ArrayList<Integer>();
         ids_documentos = new ArrayList<Integer>();
         principal = new Principal();
         con = new Conexion();
+        this.indexT = indexT;
+        this.indexD = indexD;
+        this.le = le;
         this.llenarTramites();
         this.llenarDocumento();
-
+        
     }
-
+    
     public void llenarTramites() {
         try {
             String sql = "select * from tramites";
-
+            
             con.Conectar();
             ResultSet rs = con.Consulta(sql);
-
+            
             while (rs.next()) {
-
+                
                 jc_tramites.addItem(rs.getString("codigo") + "-" + rs.getString("nombre"));
                 ids_tramites.add(rs.getInt("id"));
             }
+            jc_tramites.setSelectedIndex(indexT);
             con.Cerrar();
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
-
+    
     public void llenarDocumento() {
-
+        System.out.println(indexD);
+        
         ids_documentos.clear();
         jc_documetos.removeAllItems();
-
+        
         try {
-
+            
             String sql = "select * from documentos where id_tramite=" + ids_tramites.get(jc_tramites.getSelectedIndex());
-
+            
             con.Conectar();
             ResultSet rs = con.Consulta(sql);
-
+            
             if (rs.next()) {
                 rs.beforeFirst();
                 while (rs.next()) {
                     jc_documetos.addItem(rs.getString("nombre"));
                     ids_documentos.add(rs.getInt("id"));
                     jb_agregar.setEnabled(true);
+                    jc_documetos.getSelectedIndex();
+                    
                 }
             } else {
                 jc_documetos.addItem("Este trámite no tiene documentos");
                 jb_agregar.setEnabled(false);
             }
-
+            jc_documetos.setSelectedIndex(indexD);
         } catch (SQLException ex) {
             Logger.getLogger(NuevoError.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 
     /**
@@ -270,7 +280,6 @@ public class NuevoError extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        principal.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jb_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarActionPerformed
@@ -282,12 +291,14 @@ public class NuevoError extends javax.swing.JFrame {
                         + " values (?,?,?)";
                 con.Conectar();
                 PreparedStatement ps = con.InsertPS(sql);
-                ps.setInt(1,ids_documentos.get(jc_documetos.getSelectedIndex()));
+                ps.setInt(1, ids_documentos.get(jc_documetos.getSelectedIndex()));
                 ps.setString(2, jb_error.getText());
                 ps.setString(3, jb_descripcion.getText());
                 ps.executeUpdate();
                 con.Cerrar();
+                
                 JOptionPane.showMessageDialog(null, "Se guardó correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                le.llenarErrores(ids_documentos.get(indexD));
                 this.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(NuevoError.class.getName()).log(Level.SEVERE, null, ex);
@@ -298,7 +309,7 @@ public class NuevoError extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_agregarActionPerformed
 
     private void jc_tramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_tramitesActionPerformed
-
+        
         if (jc_tramites.getSelectedIndex() >= 0 && ids_tramites.size() > 0) {
             this.llenarDocumento();
         }
@@ -338,7 +349,7 @@ public class NuevoError extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoError().setVisible(true);
+                new NuevoError(null, 0, 0).setVisible(true);
             }
         });
     }

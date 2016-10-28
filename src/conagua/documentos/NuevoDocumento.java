@@ -27,13 +27,17 @@ public class NuevoDocumento extends javax.swing.JFrame {
     Principal principal;
     Conexion con;
     ArrayList<Integer> ids_tramites;
+    ListaDocumentos ld;
+    int index;
 
-    public NuevoDocumento() {
+    public NuevoDocumento(ListaDocumentos ld, int index) {
         initComponents();
         this.setLocationRelativeTo(null);
         ids_tramites = new ArrayList<Integer>();
         principal = new Principal();
         con = new Conexion();
+        this.index = index;
+        this.ld=ld;
         this.llenarTramites();
     }
 
@@ -49,6 +53,8 @@ public class NuevoDocumento extends javax.swing.JFrame {
                 jc_tramites.addItem(rs.getString("codigo") + "-" + rs.getString("nombre"));
                 ids_tramites.add(rs.getInt("id"));
             }
+            
+            jc_tramites.setSelectedIndex(index);
 
             con.Cerrar();
 
@@ -236,6 +242,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
 
                 con.Cerrar();
                 JOptionPane.showMessageDialog(null, "Se guardó correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                ld.llenarDocumentos();
                 this.dispose();
 
             } catch (SQLException ex) {
@@ -246,38 +253,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Faltán datos.", "¡WARNING!", JOptionPane.WARNING_MESSAGE);
         }
 
-//int id_tramite = ids_tramites.get(jc_tramites.getSelectedIndex());
-        // System.out.println(id_tramite);
 
-        /*
-        if (!jb_tipoTramite.getText().trim().isEmpty() && !jb_nomDoc.getText().trim().isEmpty() && !jb_descripcion.getText().trim().isEmpty() ){
-            try {
-                int numeroT = Integer.parseInt(jb_tipoTramite.getText());
-                String sql = "insert into documentos"
-                + "(id_tramite,nombre,descripcion)"
-                + " values (?,?,?)";
-                con.Conectar();
-
-                PreparedStatement ps = con.InsertPS(sql);
-                ps.setInt(1, numeroT);
-                ps.setString(2, jb_nomDoc.getText());
-                ps.setString(3, jb_tipoTramite.getText());
-                
-
-                ps.executeUpdate();
-
-                con.Cerrar();
-                JOptionPane.showMessageDialog(null, "se guardo correctamente.", "aviso", JOptionPane.INFORMATION_MESSAGE);
-                principal.setVisible(true);
-                this.dispose();
-            } catch (SQLException ex) {
-                Logger.getLogger(NuevoTramite.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Faltan datos por llenar.", "warning", JOptionPane.WARNING_MESSAGE);
-        }
-         */
     }//GEN-LAST:event_b_agregarActionPerformed
 
     private void jc_tramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_tramitesActionPerformed
@@ -315,7 +291,7 @@ public class NuevoDocumento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoDocumento().setVisible(true);
+                new NuevoDocumento(null, 0).setVisible(true);
             }
         });
     }

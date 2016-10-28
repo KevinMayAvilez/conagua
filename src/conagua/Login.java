@@ -84,7 +84,6 @@ public class Login extends javax.swing.JFrame {
 
         jb_login.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jb_login.setForeground(new java.awt.Color(51, 51, 51));
-        jb_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/login2.png"))); // NOI18N
         jb_login.setText("Login");
         jb_login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jb_login.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +92,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jb_login);
-        jb_login.setBounds(638, 271, 110, 41);
+        jb_login.setBounds(638, 271, 110, 27);
 
         jb_contraseña.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_contraseña.addActionListener(new java.awt.event.ActionListener() {

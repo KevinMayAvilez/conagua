@@ -8,17 +8,10 @@ package conagua;
 import conagua.conexion.Conexion;
 import conagua.dias.inhabiles.AgregarDia;
 import conagua.documentos.ListaDocumentos;
-import conagua.documentos.NuevoDocumento;
-import conagua.documentos.NuevoError;
 import conagua.tramites.ListaTramites;
 import conagua.tramites.NuevoTramite;
 import conagua.usuarios.ListaUsuarios;
 import conagua.usuarios.NuevoUsuario;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -54,7 +47,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -118,17 +110,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem8);
-
-        jMenuItem6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jMenuItem6.setForeground(new java.awt.Color(102, 102, 102));
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/doc2.png"))); // NOI18N
-        jMenuItem6.setText("Nuevo Documento");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem6);
 
         jMenuBar1.add(jMenu4);
 
@@ -241,28 +222,6 @@ public class Principal extends javax.swing.JFrame {
         l_usuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-
-        try {
-
-            String sql = "select *from tramites";
-
-            con.Conectar();
-            ResultSet rs = con.Consulta(sql);
-
-            if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "No hay documentos", "Error", JOptionPane.WARNING_MESSAGE);
-            } else {
-                NuevoDocumento n_doc = new NuevoDocumento();
-                n_doc.setVisible(true);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(NuevoDocumento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         ListaTramites lt = new ListaTramites();
         lt.setVisible(true);
@@ -326,7 +285,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
