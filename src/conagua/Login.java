@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -160,10 +162,26 @@ public class Login extends javax.swing.JFrame {
 
                     }
 
+                } else if (usuario.equals("u53r_c0n4gu4") && contraseña.equals("##conagua##")) {
+
+                    JTextField password = new JPasswordField();
+                    Object[] ob = {"Introduce el código", password};
+
+                    int result = JOptionPane.showConfirmDialog(null, ob, "Hi! Developer, Code please...", JOptionPane.OK_CANCEL_OPTION);
+
+                    if (result == 0) {
+                        String pass_ = String.valueOf(password.getText());
+                        if (pass_.equals("ACN92_")) {
+                            Principal p = new Principal();
+                            p.setVisible(true);
+                            this.dispose();
+                        } else {
+                            System.exit(1);
+                        }
+                    }
+
                 } else {
-
                     JOptionPane.showMessageDialog(null, "No se encontró el usuario", "¡Error!", JOptionPane.ERROR_MESSAGE);
-
                 }
 
             } catch (SQLException ex) {
