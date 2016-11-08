@@ -86,15 +86,16 @@ public class Login extends javax.swing.JFrame {
 
         jb_login.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
         jb_login.setForeground(new java.awt.Color(51, 51, 51));
+        jb_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/login2.png"))); // NOI18N
         jb_login.setText("Login");
         jb_login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jb_login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_loginActionPerformed(evt);
+        jb_login.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jb_loginKeyPressed(evt);
             }
         });
         getContentPane().add(jb_login);
-        jb_login.setBounds(638, 271, 110, 27);
+        jb_login.setBounds(638, 271, 110, 30);
 
         jb_contraseña.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         jb_contraseña.addActionListener(new java.awt.event.ActionListener() {
@@ -129,8 +130,16 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_loginActionPerformed
+    private void jb_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_usuarioActionPerformed
 
+    private void jb_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_contraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_contraseñaActionPerformed
+
+    private void jb_loginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_loginKeyPressed
+        
         String contraseña = String.valueOf(jb_contraseña.getPassword());
         String usuario = jb_usuario.getText();
 
@@ -193,15 +202,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Llene los datos de acceso.", "¡Error!", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_jb_loginActionPerformed
-
-    private void jb_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_usuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_usuarioActionPerformed
-
-    private void jb_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_contraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_contraseñaActionPerformed
+    }//GEN-LAST:event_jb_loginKeyPressed
 
     /**
      * @param args the command line arguments

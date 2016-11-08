@@ -6,13 +6,9 @@
 package conagua.tramites;
 
 import conagua.conexion.Conexion;
-import conagua.usuarios.EditarUsuario;
 import conagua.usuarios.ListaUsuarios;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -115,7 +111,6 @@ public class ListaTramites extends javax.swing.JFrame {
         jb_buscar = new javax.swing.JTextField();
         jb_agregar = new javax.swing.JButton();
         jb_editar = new javax.swing.JButton();
-        jb_borrar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         t_tramites = new javax.swing.JTable();
 
@@ -160,16 +155,6 @@ public class ListaTramites extends javax.swing.JFrame {
             }
         });
 
-        jb_borrar.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        jb_borrar.setForeground(new java.awt.Color(51, 51, 51));
-        jb_borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/conagua/imagenes/icons/trash.png"))); // NOI18N
-        jb_borrar.setText("Borrar");
-        jb_borrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_borrarActionPerformed(evt);
-            }
-        });
-
         t_tramites.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
         t_tramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +182,6 @@ public class ListaTramites extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jb_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jb_agregar))
                 .addGap(21, 21, 21))
         );
@@ -214,9 +198,7 @@ public class ListaTramites extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jb_agregar)
                         .addGap(29, 29, 29)
-                        .addComponent(jb_editar)
-                        .addGap(30, 30, 30)
-                        .addComponent(jb_borrar)))
+                        .addComponent(jb_editar)))
                 .addGap(65, 65, 65))
         );
 
@@ -233,27 +215,6 @@ public class ListaTramites extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jb_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_borrarActionPerformed
-        // TODO add your handling code here:
-
-        /*if (t_tramites.getSelectedRow() > -1) {
-            try {
-                String sql = "update tramites where id=" + ids_tramites.get(t_tramites.getSelectedRow());
-                con.Conectar();
-                PreparedStatement ps = con.InsertPS(sql);
-                ps.setInt(1, 0);
-                ps.executeUpdate();
-                con.Cerrar();
-                JOptionPane.showMessageDialog(null, "Se borro correctamente el tramite", "aviso", JOptionPane.INFORMATION_MESSAGE);
-                this.llenarTabla();
-            } catch (SQLException ex) {
-                Logger.getLogger(ListaTramites.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un tramite", "WARNING", JOptionPane.WARNING_MESSAGE);
-        }*/
-    }//GEN-LAST:event_jb_borrarActionPerformed
 
     private void jb_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_editarActionPerformed
         // TODO add your handling code here:
@@ -320,7 +281,6 @@ public class ListaTramites extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jb_agregar;
-    private javax.swing.JButton jb_borrar;
     private javax.swing.JTextField jb_buscar;
     private javax.swing.JButton jb_editar;
     private javax.swing.JTable t_tramites;
